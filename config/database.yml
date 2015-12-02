@@ -1,0 +1,32 @@
+# SQLite version 3.x
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+#
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV['DATABASE_PORT'] || "5432" %>
+  database: <%= ENV['DATABASE_DEVELOPMENT_NAME'] %>
+  username: <%= ENV['DATABASE_USER'] %>
+
+test:
+  <<: *default
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV['DATABASE_PORT'] || "5432" %>
+  database: <%= ENV['DATABASE_TEST_NAME'] %>
+  username: <%= ENV['DATABASE_USER'] %>
+
+production:
+  <<: *default
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV['DATABASE_PORT'] || "5432" %>
+  database: <%= ENV['DATABASE_PRODUCTION_NAME'] %>
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>

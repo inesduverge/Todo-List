@@ -1,0 +1,14 @@
+<ul>
+<% @todos.each do |todo| %>
+	<li><%= todo.item %></li>
+<% end %>
+</ul>
+
+<%= form_for(@todo) do |f| %>
+	<p>
+		<%= f.label :item %><br>
+		<%= f.text_field :item %>
+	</p>
+
+	<p><%= f.submit %></p>
+<% end %>
