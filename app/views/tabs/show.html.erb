@@ -1,0 +1,12 @@
+<p><%= @tab.titulo %></p>
+
+<%= form_for @share do |f| %>
+  <%= hidden_field :share, :tab_id, value: @tab.id %>
+
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+
+  <%= f.submit "Share" %>
+<% end %>
+
+<%= link_to "Go back", tabs_path %>

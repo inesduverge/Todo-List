@@ -16,23 +16,23 @@ class User < ActiveRecord::Base
       # the insert sql command
       insert_command = "INSERT INTO users (email, password_salt, password_hash, created_at, updated_at) values ('#{email}', '#{passwords[:password_salt]}', '#{passwords[:password_hash]}', '#{Time.now}', '#{Time.now}') RETURNING id"
       id = sql_connection.execute(insert_command)
-      return nil unless id
+      return id
     end
    
    	def self.find_with_email(email)
    	  select_command = "SELECT * FROM users WHERE email = '#{email}'"
    	  result = User.find_by_sql(select_command)
-   	  return result
+      return result.first
    	end
 
    	def self.find_with_id(id)
    	  select_query = "SELECT * FROM users WHERE id = '#{id}'"
    	  result = User.find_by_sql(select_query)
-   	  return result
+      return result.first
    	end
 
 	def self.authenticate(email, password)
-      user = self.find_with_email(email).first
+      user = self.find_with_email(email)
 
 	  if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
 	    user

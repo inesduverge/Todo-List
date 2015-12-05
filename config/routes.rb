@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root :to => "sessions#new"
   resources :users
   resources :sessions
+  resources :shares, only: [:create]
 
-  resources :todos, only: [:index, :create]
+  resources :tabs, only: [:index, :create, :new, :show]
 end

@@ -5,16 +5,18 @@ class UsersController < ApplicationController
   end
 
   def create
-    user_repeated = User.find_with_email(user_params[:email]).first
+    user_repeated = User.find_with_email(user_params[:email])
     if !user_repeated.nil?
       flash[:alert] = "Username already in use"
       @user = User.new
-      redirect_to sign_up_path
+      render "new"
     else
       id = User.create(user_params[:email], user_params[:password])
       if id
+        flash[:notice] = "User successfully created"
   		  redirect_to log_in_path
   	  else
+        @user = User.new
         flash[:alert] = 'Could not create user'
   		  render "new"
   	  end
