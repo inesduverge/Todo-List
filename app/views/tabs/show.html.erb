@@ -1,5 +1,22 @@
 <p><%= @tab.titulo %></p>
 
+<ul>
+  <% @checklists.each do |checklist| %>
+    <li><%= link_to checklist.title, checklist_path(checklist.id) %></li>
+  <% end %>
+</ul>
+
+<h3>Create a checklist</h3>
+<%= form_for @checklist do |f| %>
+  <%= hidden_field :checklist, :tab_id, value: @tab.id %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.submit "Create" %>
+<% end %>
+
+<h3>Share this tab with a user</h3>
 <%= form_for @share do |f| %>
   <%= hidden_field :share, :tab_id, value: @tab.id %>
 

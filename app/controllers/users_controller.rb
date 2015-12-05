@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   def new
+    redirect_to tabs_path if !session[:user_id].nil?
   	@user = User.new
   end
 
@@ -14,7 +15,8 @@ class UsersController < ApplicationController
       id = User.create(user_params[:email], user_params[:password])
       if id
         flash[:notice] = "User successfully created"
-  		  redirect_to log_in_path
+        session[:user_id] = id.values.first.first
+  		  redirect_to tabs_path
   	  else
         @user = User.new
         flash[:alert] = 'Could not create user'

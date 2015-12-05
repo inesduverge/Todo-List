@@ -4,4 +4,10 @@
     <li><%= link_to tab.titulo, tab_path(tab.id) %></li>
   <% end %>
 </ul>
+
+<%= form_for @tab do |f| %>
+  <%= f.label :titulo %>
+  <%= f.text_field :titulo %>
+  <%= f.submit "Create tab" %>
+<% end %>
   

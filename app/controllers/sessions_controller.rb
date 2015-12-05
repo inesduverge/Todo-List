@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    redirect_to tabs_path if !session[:user_id].nil?
   end
 
   def create

@@ -1,0 +1,23 @@
+<h1><%= @checklist.title %></h1>
+
+<h3>Create an item</h3>
+<%= form_for @checklist_item do |f| %>
+  <%= hidden_field :checklist_item, :checklist_id, value: @checklist.id %>
+
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+
+  <%= f.submit "Create" %>
+<% end %>
+
+<ul>
+  <% @checklist_items.each do |item| %>
+    <%#= form_for item do |f| %>
+      <%#= f.checkbox :status %>
+      <%#= f.submit "Update" %>
+    <%# end %>
+    <li><%= item.description %></li>
+  <% end %>
+</ul>
+
+<%= link_to "Go back", tab_path(@checklist.tab_id) %>
