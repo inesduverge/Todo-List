@@ -29,4 +29,22 @@ class Tab < ActiveRecord::Base
     return tab_id
 	end
 
+  def self.destroy(id)
+    sql_connection = ActiveRecord::Base.connection
+    items_deletion_query = "DELETE FROM checklist_items c, checklists f WHERE checklist_id = f.id AND f.tab_id = '#{id}'"
+    checklist_deletion_query = "DELETE FROM checklists WHERE tab_id = '#{id}'"
+    deletion_query = "DELETE FROM tabs WHERE id='#{id}'"
+
+    sql_connection.execute("BEGIN")
+    sql_connection.execute(items_deletion_query)
+    sql_connection.execute(deletion_query)
+    sql_connection.execute("COMMIT")
+  end
+
+  def self.update(id, titulo)
+    query = "UPDATE tabs SET titulo='#{titulo}' WHERE id='#{id}'"
+    connection = ActiveRecord::Base.connection
+    return connection.execute(query)
+  end
+
 end

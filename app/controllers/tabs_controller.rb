@@ -30,6 +30,17 @@ class TabsController < ApplicationController
     end
   end
 
+  def update
+    valid = Tab.update(params[:tab][:id], params[:tab][:titulo])
+    if valid 
+      flash[:notice] = "Tab title updated"
+    else
+      flash[:alert] = "Could not update tab name"
+    end
+
+    redirect_to :back
+  end
+  
   private
 
   def tab_params

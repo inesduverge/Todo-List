@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions
   resources :shares, only: [:create]
-  resources :checklists, only: [:create, :show]
-  resources :checklist_items, only: [:create]
+  resources :checklists, only: [:create, :show, :destroy]
+  resources :checklist_items, only: [:create, :update, :destroy]
 
-  resources :tabs, only: [:index, :create, :new, :show]
+  resources :tabs, only: [:index, :create, :new, :show, :update]
 end

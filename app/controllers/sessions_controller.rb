@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   def create
   	user = User.authenticate(params[:email], params[:password])
   	if user
-  		session[:user_id] = user.id
+  		session[:user_id] = user.id #session é uma ação de rails
   		redirect_to tabs_path, :notice => "Logged in!"
   	else
   		flash[:alert] = "Invalid username or password"

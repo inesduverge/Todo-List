@@ -11,4 +11,19 @@ class ChecklistItemsController < ApplicationController
     redirect_to checklist_path(params[:checklist_item][:checklist_id])
   end
 
+  def update
+    id = ChecklistItem.update(params[:checklist_item])
+    if id
+      flash[:notice] = "Checklist Item updated!"
+    else
+      flash[:alert] = "Something went wrong while updating your checklist item"
+    end
+    redirect_to checklist_path(params[:checklist_item][:checklist_id])
+  end
+
+  def destroy
+    ChecklistItem.destroy(params[:id])
+    redirect_to :back
+  end
+
 end

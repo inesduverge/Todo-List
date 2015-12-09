@@ -12,11 +12,19 @@
 
 <ul>
   <% @checklist_items.each do |item| %>
-    <%#= form_for item do |f| %>
-      <%#= f.checkbox :status %>
-      <%#= f.submit "Update" %>
-    <%# end %>
-    <li><%= item.description %></li>
+    <li>
+      <p>
+        <%= link_to "x", checklist_item_path(item.id), method: :delete %>
+        <%= item.state %>: <%= item.description %></p>
+
+      <%= form_for item do |f2| %>
+        <%= hidden_field :checklist_item, :id, value: item.id %>
+        <%= hidden_field :checklist_item, :checklist_id, value: item.checklist_id %>
+        <%= f2.text_field :description %>
+        <%= f2.check_box :state %>
+        <%= f2.submit "Update" %>
+      <% end %>
+    </li>
   <% end %>
 </ul>
 

@@ -17,4 +17,17 @@ class Checklist < ActiveRecord::Base
     id = sql_connection.execute(insertion_query)
     return id
   end
+
+  def self.destroy(id)
+    sql_connection = ActiveRecord::Base.connection
+    items_deletion_query = "DELETE FROM checklist_items WHERE checklist_id='#{id}'"
+
+    deletion_query = "DELETE FROM checklists WHERE id='#{id}'"
+
+    sql_connection.execute("BEGIN")
+    sql_connection.execute(items_deletion_query)
+    sql_connection.execute(deletion_query)
+    sql_connection.execute("COMMIT")
+  end
+
 end

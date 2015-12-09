@@ -2,7 +2,10 @@
 
 <ul>
   <% @checklists.each do |checklist| %>
-    <li><%= link_to checklist.title, checklist_path(checklist.id) %></li>
+    <li>
+      <%= link_to "x", checklist_path(checklist.id), method: :delete %>
+      <%= link_to checklist.title, checklist_path(checklist.id) %>
+    </li>
   <% end %>
 </ul>
 

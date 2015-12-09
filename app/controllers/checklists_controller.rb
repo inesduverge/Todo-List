@@ -16,4 +16,10 @@ class ChecklistsController < ApplicationController
     redirect_to tab_path(params[:checklist][:tab_id])
   end
 
+  def destroy
+    Checklist.destroy(params[:id])
+    flash[:notice] = "Checklist was deleted"
+    redirect_to :back
+  end
+
 end
