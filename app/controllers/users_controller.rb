@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def new
-    redirect_to tabs_path if !session[:user_id].nil?
+    redirect_to tabs_path if session[:user_id].nil?
   	@user = User.new
   end
 

@@ -37,6 +37,7 @@ class Tab < ActiveRecord::Base
 
     sql_connection.execute("BEGIN")
     sql_connection.execute(items_deletion_query)
+    sql_connection.execute(items_deletion_query)
     sql_connection.execute(deletion_query)
     sql_connection.execute("COMMIT")
   end
