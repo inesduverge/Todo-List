@@ -21,7 +21,7 @@ class Note < ActiveRecord::Base
   def self.destroy(id)
     sql_connection = ActiveRecord::Base.connection
 
-    deletion_query = "DELETE FROM checklists WHERE id='#{id}'"
+    deletion_query = "DELETE FROM notes WHERE id='#{id}'"
     sql_connection.execute(deletion_query)
   
   end
