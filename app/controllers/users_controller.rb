@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
 
   def new
-    redirect_to tabs_path if !session[:user_id].nil?
+    #para o caso de o user estar logado, a pagina de sign up nao tem sentido
+    #redirect_to tabs_path if !session[:user_id].nil?
   	@user = User.new
   end
 

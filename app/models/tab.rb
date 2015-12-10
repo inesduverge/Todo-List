@@ -19,7 +19,7 @@ class Tab < ActiveRecord::Base
 
 	def self.create(title, user_id)
 		sql_connection = ActiveRecord::Base.connection
-    insert_query = "INSERT INTO tabs (titulo, created_at, updated_at) values ('#{title}', '#{Time.now}', '#{Time.now}') RETURNING id"
+    insert_query = "INSERT INTO tabs (titulo, created_at, updated_at) values ('#{title}', '#{Time.now}', '#{Time.now}') RETURNING id" #retorna um duplo array ex: [["2"]]
 
     sql_connection.execute("BEGIN")
 		tab_id = sql_connection.execute(insert_query)

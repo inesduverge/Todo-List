@@ -13,7 +13,7 @@ class ChecklistsController < ApplicationController
     else
       flash[:alert] = "Error while creating a checklist"
     end
-    redirect_to tab_path(params[:checklist][:tab_id])
+    redirect_to :back
   end
 
   def destroy

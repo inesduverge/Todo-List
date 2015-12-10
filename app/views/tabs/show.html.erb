@@ -19,6 +19,30 @@
   <%= f.submit "Create" %>
 <% end %>
 
+<ul>
+  <% @notes.each do |note| %>
+    <li>
+      <%= link_to "x", note_path(note.id), method: :delete %>
+      <%= note.title%>
+      <p>  <%= note.description%><p>
+    </li>
+
+  <% end %>
+</ul>
+
+<h3>Create a note</h3>
+<%= form_for @note do |f| %>
+  <%= hidden_field :note, :tab_id, value: @tab.id %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+   <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.submit "Create" %>
+<% end %>
+
+
 <h3>Share this tab with a user</h3>
 <%= form_for @share do |f| %>
   <%= hidden_field :share, :tab_id, value: @tab.id %>
