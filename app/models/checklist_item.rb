@@ -1,7 +1,18 @@
 class ChecklistItem < ActiveRecord::Base
+
   def self.find_by_checklist(checklist_id)
     select_query = "SELECT * FROM checklist_items WHERE checklist_id = '#{checklist_id}' ORDER BY created_at DESC"
     return ChecklistItem.find_by_sql(select_query)
+  end
+
+  def self.find_all
+    items_by_id = {}
+    select_query = "SELECT * FROM checklist_items"
+    items = ChecklistItem.find_by_sql(select_query)
+    items.each do |item|
+      (items_by_id[item.checklist_id] ||= []) << item
+    end
+    return items_by_id
   end
 
   def self.destroy(id)

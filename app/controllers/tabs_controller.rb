@@ -13,6 +13,8 @@ class TabsController < ApplicationController
     @share = Share.new
     @checklist = Checklist.new
     @checklists = Checklist.find_all(params[:id])
+    @checklist_items = ChecklistItem.find_all
+    @checklist_item = ChecklistItem.new
     @note= Note.new
     @notes = Note.find_all(params[:id])
   end
@@ -48,6 +50,10 @@ class TabsController < ApplicationController
   
   
   private
+
+  def get_all_items
+
+  end
 
   def tab_params
     params.require(:tab).permit(:titulo)

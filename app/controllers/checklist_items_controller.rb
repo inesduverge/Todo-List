@@ -8,7 +8,7 @@ class ChecklistItemsController < ApplicationController
     else
       flash[:alert] = "Error while creating the item"
     end
-    redirect_to checklist_path(params[:checklist_item][:checklist_id])
+    redirect_to :back
   end
 
   def update
@@ -18,7 +18,7 @@ class ChecklistItemsController < ApplicationController
     else
       flash[:alert] = "Something went wrong while updating your checklist item"
     end
-    redirect_to checklist_path(params[:checklist_item][:checklist_id])
+    redirect_to :back
   end
 
   def destroy
