@@ -46,6 +46,7 @@ class TabsController < ApplicationController
     redirect_to :back
   end
   
+  
   private
 
   def tab_params

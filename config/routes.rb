@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   resources :notes, only: [:create, :destroy]
   resources :checklist_items, only: [:create, :update, :destroy]
 
-  resources :tabs, only: [:index, :create, :show, :update]
+  resources :tabs, only: [:index, :create, :show, :update, :destroy]
 end
