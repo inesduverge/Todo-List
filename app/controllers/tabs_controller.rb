@@ -6,6 +6,9 @@ class TabsController < ApplicationController
   end
 
   def show
+    @tabs = Tab.find_all_from_user(current_user.id)
+    @new = Tab.new
+    
     @tab = Tab.find_by_id(params[:id])
     @share = Share.new
     @checklist = Checklist.new
