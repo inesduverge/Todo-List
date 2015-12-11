@@ -4,14 +4,15 @@
     <% @tabs.each do |tab| %>
       <li>
         <%= link_to tab.titulo, tab_path(tab.id) %>
-        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-pencil" aria-hidden="true" onclick= "edita()"></span>
       </li>
-
+      <div class="update">
       <%= form_for tab do |f2| %>
         <%= hidden_field :tab, :id, value: tab.id %>
         <%= f2.text_field :titulo%>
         <%= f2.submit "Update" %>
       <% end %>
+      </div>
     <% end %>
   </ul>
 
@@ -151,3 +152,23 @@
     </div>
 
     <!--------------------------------------------------FIM           INTERIOR (CHECKS, NOTES, POINTS)------------------------------------------------------------------>
+
+  
+
+<script>
+  var controla = false;
+function edita() {
+    if(controla==false){
+    
+
+$('.update').css("display", "block");  
+    controla=true;
+    }
+    else if(controla==true){
+ 
+
+   $('.update').css("display", "none");  
+    controla=false;
+    }
+    };
+  </script>
