@@ -12,12 +12,45 @@
  
   <% end %>
 </ul>
-<button id="new" >new tab</button>
+
 <div id='ct'>
 <%= form_for @tab do |f| %>
-  <%= f.label :titulo %>
   <%= f.text_field :titulo %>
-  <%= f.submit "create" %>
+  <%= f.submit "create" , class: 'create'%>
 <% end %>
   </div>
   
+  
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" id= "new">new tab</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Create new tab</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for @tab do |f| %>
+        <%= f.text_field :titulo , class: 'texto'%>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" >
+        <%= f.submit "create" , class: 'create'%>
+        </button>
+        </div>
+<% end %>
+      
+    </div>
+  </div>
+</div>
+  
+  
+  
+  <script>
+function aparece() {
+    document.getElementById("ct").style.display= "block";  
+    };
+  </script>
