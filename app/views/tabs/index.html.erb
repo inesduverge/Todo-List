@@ -12,10 +12,12 @@
  
   <% end %>
 </ul>
-
+<button id="new" >new tab</button>
+<div id='ct'>
 <%= form_for @tab do |f| %>
   <%= f.label :titulo %>
   <%= f.text_field :titulo %>
-  <%= f.submit "Create tab" %>
+  <%= f.submit "create" %>
 <% end %>
+  </div>
   
