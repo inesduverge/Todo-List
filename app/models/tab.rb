@@ -36,6 +36,7 @@ class Tab < ActiveRecord::Base
     notes_deletion_query = "DELETE FROM notes WHERE notes.tab_id = '#{id}'"
     pointlist_items_deletion_query = "DELETE FROM pointlist_items pi, pointlists p WHERE pi.pointlist_id = p.id AND p.tab_id = '#{id}'"
     pointlist_deletion_query = "DELETE FROM pointlists WHERE tab_id = '#{id}'"
+    shared_deletion_query = "DELETE FROM shared WHERE tab_id='#{id}'"
     deletion_query = "DELETE FROM tabs WHERE id='#{id}'"
 
     sql_connection.execute("BEGIN")
@@ -44,6 +45,7 @@ class Tab < ActiveRecord::Base
     sql_connection.execute(notes_deletion_query)
     sql_connection.execute(pointlist_items_deletion_query)
     sql_connection.execute(pointlist_deletion_query)
+    sql_connection.execute(shared_deletion_query)
     sql_connection.execute(deletion_query)
     sql_connection.execute("COMMIT")
   end
