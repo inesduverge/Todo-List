@@ -1,13 +1,20 @@
 class SharesController < ApplicationController
 
-  def create 
+  def create
     user = User.find_with_email(params[:share][:email])
-    tab_id = Share.create(user.id, params[:share][:tab_id])
-    if tab_id
-      flash[:notice] = "Tab successfully shared"
-      redirect_to :back
+    shared_already = Share.find(params[:share][:tab_id], user)
+    if shared_already.nil?
+      tab_id = Share.create(user.id, params[:share][:tab_id])
+
+      if tab_id
+        flash[:notice] = "Tab successfully shared"
+        redirect_to :back
+      else
+        flash[:alert] = "Tab could not be shared"
+        redirect_to :back
+      end
     else
-      flash[:notice] = "Tab could not be shared"
+      flash[:alert] = "Tab was already shared with that user"
       redirect_to :back
     end
   end

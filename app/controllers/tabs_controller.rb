@@ -52,7 +52,7 @@ class TabsController < ApplicationController
 
   def update
     id = Tab.update(params[:tab][:id], params[:tab][:titulo])
-    if id 
+    if id
       flash[:notice] = "Tab title updated"
     else
       flash[:alert] = "Could not update tab name"
@@ -60,13 +60,9 @@ class TabsController < ApplicationController
 
     redirect_to :back
   end
-  
-  
+
+
   private
-
-  def get_all_items
-
-  end
 
   def tab_params
     params.require(:tab).permit(:titulo)
