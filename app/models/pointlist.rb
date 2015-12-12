@@ -27,4 +27,10 @@ class Pointlist < ActiveRecord::Base
     sql_connection.execute(deletion_query)
     sql_connection.execute("COMMIT")
   end
+
+  def self.update(pointlist)
+    sql_connection = ActiveRecord::Base.connection
+    query = "UPDATE pointlists SET title='#{pointlist[:title]}' WHERE id='#{pointlist[:id]}'"
+    return sql_connection.execute(query)
+  end
 end

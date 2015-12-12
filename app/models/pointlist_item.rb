@@ -23,6 +23,12 @@ class PointlistItem < ActiveRecord::Base
     return items
   end
 
+  def self.update(pointlist_item)
+    sql_connection = ActiveRecord::Base.connection
+    query = "UPDATE pointlist_items SET title='#{pointlist_item[:title]}' WHERE id='#{pointlist_item[:id]}'"
+    return sql_connection.execute(query)
+  end
+
   def self.create(level, parent_id, pointlist_id, title)
     sql_connection = ActiveRecord::Base.connection
     insertion_query = "INSERT INTO pointlist_items (level, parent_id, pointlist_id, title, updated_at, created_at) values ('#{level}', '#{parent_id}', '#{pointlist_id}', '#{title}', '#{Time.now}', '#{Time.now}') RETURNING id"

@@ -1,5 +1,5 @@
 class ChecklistItemsController < ApplicationController
-  
+
   def create
     id = ChecklistItem.create(params[:checklist_item][:checklist_id],
                               params[:checklist_item][:description])

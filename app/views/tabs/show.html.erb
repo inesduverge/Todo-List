@@ -17,7 +17,7 @@
       <% end %>
     </ul>
 
-    <!--------------------------------------------------CRIAR NOVA TAB------------------------------------------------------------------>  
+    <!--------------------------------------------------CRIAR NOVA TAB------------------------------------------------------------------>
 
     <div id='ct'>
       <%= form_for @new do |f| %>
@@ -49,7 +49,7 @@
       </div>
     </div>
 
-    <!--------------------------------------------------FIM   CRIAR NOVA TAB------------------------------------------------------------------> 
+    <!--------------------------------------------------FIM   CRIAR NOVA TAB------------------------------------------------------------------>
 
     <h3>Share this tab with a user</h3>
     <%= form_for @share do |f| %>
@@ -71,7 +71,7 @@
     <%= link_to "Go back", tabs_path %>
   </div>
 
-  <!--------------------------------------------------INTERIOR (CHECKS, NOTES, POINTS)------------------------------------------------------------------> 
+  <!--------------------------------------------------INTERIOR (CHECKS, NOTES, POINTS)------------------------------------------------------------------>
 
   <div class="col-md-10">
     <p><%= @tab.titulo %></p>
@@ -161,7 +161,11 @@
                   <li>
                     <%= pointlist.title %>
                     <%= link_to "x", pointlist_path(pointlist.id), method: :delete %>
-  
+                    <%= form_for pointlist do |f12| %>
+                      <%= hidden_field :pointlist, :id, value: pointlist.id %>
+                      <%= f12.text_field :title %>
+                      <%= f12.submit "Update" %>
+                    <% end %>
                     <%= form_for @pointlist_item do |f6| %>
                       <%= hidden_field :pointlist_item, :level, value: 0 %>
                       <%= hidden_field :pointlist_item, :parent_id, value: -1 %>
@@ -176,6 +180,11 @@
                         <ul>
                           <% initial.each do |point| %>
                             <li><%= point.title %></li>
+                            <%= form_for point do |f10| %>
+                              <%= hidden_field :pointlist_item, :id, value: point.id %>
+                              <%= f10.text_field :title %>
+                              <%= f10.submit "Update" %>
+                            <% end %>
                             <%= form_for @pointlist_item do |f8| %>
                               <%= hidden_field :pointlist_item, :level, value: point.level %>
                               <%= hidden_field :pointlist_item, :parent_id, value: point.id %>
@@ -191,7 +200,7 @@
                     <% end %>
                   </li>
                 <% end %>
-              </ul>              
+              </ul>
 
               <h3>Create a pointlist</h3>
               <%= form_for @pointlist do |f5| %>
@@ -214,13 +223,13 @@
           if(controla==false){
 
 
-            $('.update').css("display", "block");  
+            $('.update').css("display", "block");
             controla=true;
           }
           else if(controla==true){
 
 
-            $('.update').css("display", "none");  
+            $('.update').css("display", "none");
             controla=false;
           }
         };

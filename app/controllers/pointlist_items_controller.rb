@@ -13,4 +13,14 @@ class PointlistItemsController < ApplicationController
 
     redirect_to :back
   end
+
+  def update
+    id = PointlistItem.update(params[:pointlist_item])
+    if id
+      flash[:notice] = "Pointlist Item updated!"
+    else
+      flash[:alert] = "Something went wrong while updating your checklist item"
+    end
+    redirect_to :back
+  end
 end
