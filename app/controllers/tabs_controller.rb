@@ -51,11 +51,15 @@ class TabsController < ApplicationController
   end
 
   def update
-    id = Tab.update(params[:tab][:id], params[:tab][:titulo])
-    if id
-      flash[:notice] = "Tab title updated"
+    if !params[:tab][:titulo].empty?
+      id = Tab.update(params[:tab][:id], params[:tab][:titulo])
+      if id
+        flash[:notice] = "Tab title updated"
+      else
+        flash[:alert] = "Could not update tab name"
+      end
     else
-      flash[:alert] = "Could not update tab name"
+      flash[:alert] = "Tab cannot be empty"
     end
 
     redirect_to :back
