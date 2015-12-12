@@ -18,7 +18,7 @@ class TabsController < ApplicationController
     # Checklists Logic
     @checklist = Checklist.new
     @checklists = Checklist.find_all(params[:id])
-    @checklist_items = ChecklistItem.find_all
+    @checklist_items = ChecklistItem.find_all(params[:id])
     @checklist_item = ChecklistItem.new
 
     # Notes Logic
@@ -28,6 +28,8 @@ class TabsController < ApplicationController
     # PointLists Logic
     @pointlists = Pointlist.find_all(params[:id])
     @pointlist = Pointlist.new
+    @pointlist_items = PointlistItem.find_all_items(params[:id])
+    @pointlist_item = PointlistItem.new
   end
 
   def create

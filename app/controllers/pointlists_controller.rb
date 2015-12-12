@@ -11,4 +11,10 @@ class PointlistsController < ApplicationController
     redirect_to :back
   end
 
+  def destroy
+    Pointlist.destroy(params[:id])
+    flash[:notice] = "Pointlist was deleted"
+    redirect_to :back
+  end
+
 end

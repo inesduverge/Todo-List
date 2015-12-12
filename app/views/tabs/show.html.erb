@@ -160,6 +160,35 @@
                 <% @pointlists.each do |pointlist| %>
                   <li>
                     <%= pointlist.title %>
+                    <%= link_to "x", pointlist_path(pointlist.id), method: :delete %>
+  
+                    <%= form_for @pointlist_item do |f6| %>
+                      <%= hidden_field :pointlist_item, :level, value: 0 %>
+                      <%= hidden_field :pointlist_item, :parent_id, value: -1 %>
+                      <%= hidden_field :pointlist_item, :pointlist_id, value: pointlist.id %>
+
+                      <%= f6.text_field :title %>
+                      <%= f6.submit "Create" %>
+                    <% end %>
+                    <% if !@pointlist_items.nil? %>
+                      <% if !@pointlist_items[pointlist.id].nil? && !@pointlist_items[pointlist.id][1].nil? %>
+                        <% initial = @pointlist_items[pointlist.id][1][-1] %>
+                        <ul>
+                          <% initial.each do |point| %>
+                            <li><%= point.title %></li>
+                            <%= form_for @pointlist_item do |f8| %>
+                              <%= hidden_field :pointlist_item, :level, value: point.level %>
+                              <%= hidden_field :pointlist_item, :parent_id, value: point.id %>
+                              <%= hidden_field :pointlist_item, :pointlist_id, value: pointlist.id %>
+
+                              <%= f8.text_field :title %>
+                              <%= f8.submit "Create" %>
+                            <% end %>
+                            <%= render partial: 'tabs/pointlist', locals: {parent_item: point} %>
+                          <% end %>
+                        </ul>
+                      <% end %>
+                    <% end %>
                   </li>
                 <% end %>
               </ul>              

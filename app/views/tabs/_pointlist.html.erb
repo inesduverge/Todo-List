@@ -1,0 +1,18 @@
+
+<% new_level = parent_item.level + 1 %>
+<% if !@pointlist_items[parent_item.pointlist_id].nil? && !@pointlist_items[parent_item.pointlist_id][new_level].nil? && !@pointlist_items[parent_item.pointlist_id][new_level][parent_item.id].nil? %>
+  <ul>
+    <% @pointlist_items[parent_item.pointlist_id][new_level][parent_item.id].each do |item| %>
+      <li><%= item.title %></li>
+      <%= form_for @pointlist_item do |f7| %>
+        <%= hidden_field :pointlist_item, :level, value: item.level %>
+        <%= hidden_field :pointlist_item, :parent_id, value: item.id %>
+        <%= hidden_field :pointlist_item, :pointlist_id, value: parent_item.pointlist_id %>
+
+        <%= f7.text_field :title %>
+        <%= f7.submit "Create" %>
+      <% end %>
+      <%= render partial: 'tabs/pointlist', locals: {parent_item: item} %>
+    <% end %>
+  </ul>
+<% end %>
