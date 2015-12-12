@@ -4,13 +4,14 @@
 
 
 <div class="col-md-2">
-  <ul>
+  <ul id="lista_tabs">
     <% @tabs.each do |tab| %>
       <li class="tabs">
         <%= link_to tab.titulo, tab_path(tab.id) %>
-        <%= image_tag("edit.svg", :alt => "edit", :onclick => "edita()", :class => "edit")%>
+        <%= image_tag("edit.svg", :alt => "edit", :onclick => "edita()", :class => "edita") %>
+        <!--  image_tag("edit.svg", :alt => "edit", :onclick => "edita()", :class => "edita#{tab.id}") %> -->
       </li>
-      <div class="update">
+      <div class="update <%= "#{tab.id}" %>">
       <%= form_for tab do |f2| %>
         <%= hidden_field :tab, :id, value: tab.id %>
         <%= f2.text_field :titulo, class: 'texto'%>
@@ -20,8 +21,18 @@
     <% end %>
   </ul>
 
-  <!--------------------------------------------------CRIAR NOVA TAB------------------------------------------------------------------>  
+<script>
+  function edita() {
+    console.log("poop");
+  $('.update' ).css( "display", "block" );
+};
+  
+</script>
 
+
+  <!--------------------------------------------------CRIAR NOVA TAB------------------------------------------------------------------>  
+  <div id="line"></div>
+  
   <div id='ct'>
     <%= form_for @new do |f| %>
       <%= f.text_field :titulo %>
@@ -54,7 +65,7 @@
   </div>
 
   <!--------------------------------------------------FIM   CRIAR NOVA TAB------------------------------------------------------------------> 
-  <h3>Share this tab with a user</h3>
+  <h3 id="share">share tab</h3>
   <%= form_for @share do |f| %>
     <%= hidden_field :share, :tab_id, value: @tab.id %>
 
@@ -167,7 +178,7 @@
   
 
 <script>
-  var controla = false;
+ /* var controla = false;
 function edita() {
     if(controla==false){
     
@@ -181,7 +192,7 @@ $('.update').css("display", "block");
    $('.update').css("display", "none");  
     controla=false;
     }
-    };
+    };*/
   </script>
   
   
