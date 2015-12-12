@@ -31,13 +31,19 @@ class Tab < ActiveRecord::Base
 
   def self.destroy(id)
     sql_connection = ActiveRecord::Base.connection
-    items_deletion_query = "DELETE FROM checklist_items c, checklists f WHERE checklist_id = f.id AND f.tab_id = '#{id}'"
+    checklist_items_deletion_query = "DELETE FROM checklist_items c, checklists f WHERE c.checklist_id = f.id AND f.tab_id = '#{id}'"
     checklist_deletion_query = "DELETE FROM checklists WHERE tab_id = '#{id}'"
+    notes_deletion_query = "DELETE FROM notes WHERE notes.tab_id = '#{id}'"
+    pointlist_items_deletion_query = "DELETE FROM pointlist_items pi, pointlists p WHERE pi.pointlist_id = p.id AND p.tab_id = '#{id}'"
+    pointlist_deletion_query = "DELETE FROM pointlists WHERE tab_id = '#{id}'"
     deletion_query = "DELETE FROM tabs WHERE id='#{id}'"
 
     sql_connection.execute("BEGIN")
-    sql_connection.execute(items_deletion_query)
-    sql_connection.execute(items_deletion_query)
+    sql_connection.execute(checklist_items_deletion_query)
+    sql_connection.execute(checklist_deletion_query)
+    sql_connection.execute(notes_deletion_query)
+    sql_connection.execute(pointlist_items_deletion_query)
+    sql_connection.execute(pointlist_deletion_query)
     sql_connection.execute(deletion_query)
     sql_connection.execute("COMMIT")
   end

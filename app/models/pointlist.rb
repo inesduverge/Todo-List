@@ -18,5 +18,13 @@ class Pointlist < ActiveRecord::Base
     return id
   end
 
-  # TODO: Missing destroy method
+  def self.delete(pointlist_id)
+    sql_connection = ActiveRecord::Base.connection
+    items_deletion_query = "DELETE FROM pointlist_items pi WHERE pointlist_id = '#{pointlist_id}'"
+    deletion_query = "DELETE FROM pointlists WHERE id = '#{pointlist_id}'"
+    sql_connection.execute("BEGIN")
+    sql_connection.execute(items_deletion_query)
+    sql_connection.execute(deletion_query)
+    sql_connection.execute("COMMIT")
+  end
 end
