@@ -17,6 +17,7 @@ class TabsController < ApplicationController
     @checklist_item = ChecklistItem.new
     @note= Note.new
     @notes = Note.find_all(params[:id])
+    @users = User.find_all_from_tab(params[:id])
   end
 
   def create

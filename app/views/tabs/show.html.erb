@@ -50,7 +50,6 @@
   </div>
 
   <!--------------------------------------------------FIM   CRIAR NOVA TAB------------------------------------------------------------------> 
-
   <h3>Share this tab with a user</h3>
   <%= form_for @share do |f| %>
     <%= hidden_field :share, :tab_id, value: @tab.id %>
@@ -60,6 +59,14 @@
     <%= f.submit "Share" %>
   <% end %>
 
+  <ul>
+    <% @users.each do |user| %>
+      <li>
+        <%= user.email %>
+      </li>
+    <% end %>
+  </ul>
+  
   <%= link_to "Go back", tabs_path %>
 </div>
 

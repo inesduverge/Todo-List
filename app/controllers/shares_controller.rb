@@ -5,10 +5,10 @@ class SharesController < ApplicationController
     tab_id = Share.create(user.id, params[:share][:tab_id])
     if tab_id
       flash[:notice] = "Tab successfully shared"
-      redirect_to tabs_path
+      redirect_to :back
     else
       flash[:notice] = "Tab could not be shared"
-      redirect_to tab_path(params[:id])
+      redirect_to :back
     end
   end
 

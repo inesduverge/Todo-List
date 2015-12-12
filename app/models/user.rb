@@ -46,4 +46,9 @@ class User < ActiveRecord::Base
       end
       return { password_salt: password_salt, password_hash: password_hash }
     end
+
+   def self.find_all_from_tab(tab_id)
+    select_query = "SELECT u.* FROM shares s, users u WHERE u.id = s.user_id AND s.tab_id = '#{tab_id}'"
+    self.find_by_sql(select_query)
+   end
 end
