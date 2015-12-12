@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :checklists, only: [:create, :show, :destroy]
   resources :notes, only: [:create, :destroy]
   resources :checklist_items, only: [:create, :update, :destroy]
+  resources :pointlists, only: [:create, :show]
 
   resources :tabs, only: [:index, :create, :show, :update, :destroy]
 end

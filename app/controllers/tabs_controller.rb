@@ -6,18 +6,28 @@ class TabsController < ApplicationController
   end
 
   def show
+    # Share logic
+    @share = Share.new
+    @users = User.find_all_from_tab(params[:id])
+
+    # Tabs logic
     @tabs = Tab.find_all_from_user(current_user.id)
     @new = Tab.new
-    
     @tab = Tab.find_by_id(params[:id])
-    @share = Share.new
+
+    # Checklists Logic
     @checklist = Checklist.new
     @checklists = Checklist.find_all(params[:id])
     @checklist_items = ChecklistItem.find_all
     @checklist_item = ChecklistItem.new
+
+    # Notes Logic
     @note= Note.new
     @notes = Note.find_all(params[:id])
-    @users = User.find_all_from_tab(params[:id])
+
+    # PointLists Logic
+    @pointlists = Pointlist.find_all(params[:id])
+    @pointlist = Pointlist.new
   end
 
   def create

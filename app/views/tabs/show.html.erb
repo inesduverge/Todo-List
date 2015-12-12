@@ -79,12 +79,13 @@
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Checklists</a></li>
       <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Notes</a></li>
-      <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+      <li role="presentation"><a href="#pointlist" aria-controls="messages" role="tab" data-toggle="tab">Pointlist</a></li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="home"><ul>
+      <div role="tabpanel" class="tab-pane active" id="home">
+        <ul>
           <ul>
             <% @checklists.each do |checklist| %>
               <li>
@@ -135,9 +136,9 @@
         <ul>
           <% @notes.each do |note| %>
             <li>
-              <%= note.title%>
+              <%= note.title %>
               <%= link_to "x", note_path(note.id), method: :delete %>
-              <p><%= note.description%><p>
+              <p><%= note.description %><p>
                 </li>
               <% end %>
             </ul>
@@ -153,7 +154,24 @@
               <%= f.submit "Create" %>
             <% end %>
           </div>
-          <div role="tabpanel" class="tab-pane" id="messages">...</div>
+          <div role="tabpanel" class="tab-pane" id="pointlist">
+            <ul>
+              <% @pointlists.each do |pointlist| %>
+                <li>
+                  <%= pointlist.title %>
+                </li>
+              <% end %>
+            </ul>              
+
+            <h3>Create a pointlist</h3>
+            <%= form_for @pointlist do |f5| %>
+              <%= hidden_field :pointlist, :tab_id, value: @tab.id %>
+
+              <%= f5.label :title %>
+              <%= f5.text_field :title %>
+              <%= f5.submit "Create" %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
