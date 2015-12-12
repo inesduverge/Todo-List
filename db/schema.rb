@@ -26,14 +26,14 @@ ActiveRecord::Schema.define(version: 20151212003008) do
 
   create_table "checklists", force: :cascade do |t|
     t.string   "title",      null: false
-    t.integer  "tab_id",     null: false
+    t.integer  "tab_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "notes", force: :cascade do |t|
-    t.integer  "tab_id"
     t.string   "title",       null: false
+    t.integer  "tab_id"
     t.text     "description", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
