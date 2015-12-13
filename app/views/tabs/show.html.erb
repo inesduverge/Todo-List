@@ -4,6 +4,7 @@
     <ul id="lista_tabs">
       <% @tabs.each do |tab| %>
         <li class="tabs">
+        <%= link_to "x", tab_path(tab.id), method: :delete %>
           <%= link_to tab.titulo, tab_path(tab.id) %>
           <%= image_tag "edit.svg", alt: "edit", class: "edita", onclick: "$('.tab#{tab.id}\').css('display', 'block')" %>
           <!--  image_tag("edit.svg", :alt => "edit", :onclick => "edita()", :class => "edita#{tab.id}") %> -->
@@ -112,8 +113,13 @@
             <ul>
               <% @checklists.each do |checklist| %>
                 <li class="lista">
-                  <%= link_to checklist.title, checklist_path(checklist.id), class: 'nomeC' %>
+                  <%= checklist.title, class: 'nomeC' %>
                   <%= link_to "x", checklist_path(checklist.id), method: :delete, class: 'x' %>
+                  <%= form_for checklist do |f16| %>
+                    <%= hidden_field :checklist, :id, value: checklist.id %>
+                    <%= f16.text_field :title %>
+                    <%= f16.submit "Update" %>
+                  <% end %>
                 </li>
 
                 <%# Form para criar um item na checklist %>
@@ -192,7 +198,16 @@
                 <%= note.title %>
                 <%= link_to "x", note_path(note.id), method: :delete %>
                 <p><%= note.description %><p>
-                  </li>
+                <%= form_for note do |f15| %>
+                  <%= hidden_field :note, :tab_id, value: @tab.id %>
+                  <%= hidden_field :note, :id, value: note.id %>
+                  <%= f15.label :title %>
+                  <%= f15.text_field :title %>
+                  <%= f15.label :description %>
+                  <%= f15.text_area :description %>
+                  <%= f15.submit "Update" %>
+                <% end %>
+              </li>
                 <% end %>
               </ul>
 

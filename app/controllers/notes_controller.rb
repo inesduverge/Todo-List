@@ -1,8 +1,8 @@
 class NotesController < ApplicationController
 
   def create
-    if !params[:note][:title].empty? && !params[:note][:description].empty?
-      id = Note.create(params[:note][:tab_id], params[:note][:title], params[:note][:description]) 
+    if Note.validate(params[:note])
+      id = Note.create(params[:note]) 
       if id
         flash[:notice] = "Note created successfully"
       else
@@ -10,6 +10,20 @@ class NotesController < ApplicationController
       end
     else
       flash[:alert] = "You cannot have a note with an empty description and/or title"
+    end
+    redirect_to :back
+  end
+
+  def update
+    if Note.validate(params[:note])
+      id = Note.update(params[:note])
+      if id
+        flash[:notice] = "Note successfully updated"
+      else
+        flash[:alert] = "You were not able to update the note"
+      end
+    else
+      flash[:alert] = "You cannot update a note with empty parameters"
     end
     redirect_to :back
   end

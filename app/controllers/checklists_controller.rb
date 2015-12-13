@@ -1,11 +1,5 @@
 class ChecklistsController < ApplicationController
 
-  def show
-    @checklist = Checklist.find_by_id(params[:id])
-    @checklist_item = ChecklistItem.new
-    @checklist_items = ChecklistItem.find_by_checklist(params[:id])
-  end
-
   def create
     if Checklist.validate_title(params[:checklist][:title])
       id = Checklist.create(params[:checklist][:tab_id], params[:checklist][:title]) 
@@ -16,6 +10,20 @@ class ChecklistsController < ApplicationController
       end
     else
       flash[:alert] = "Title is either too big (20 characters) or empty"
+    end
+    redirect_to :back
+  end
+
+  def update
+    if Checklist.validate_title(params[:checklist][:title])
+      id = Checklist.update(params[:checklist])
+      if id
+        flash[:notice] = "Checklist title was updated"
+      else
+        flash[:alert] = "Could not update checklist title"
+      end
+    else
+      flash[:alert] = "Title too long/empty"
     end
     redirect_to :back
   end

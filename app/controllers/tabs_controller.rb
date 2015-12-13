@@ -7,29 +7,34 @@ class TabsController < ApplicationController
 
   def show
     # Share logic
-    @share = Share.new
-    @users = User.find_all_from_tab(params[:id])
+    if !Tab.find_with_id(params[:id]).nil?
+      @share = Share.new
+      @users = User.find_all_from_tab(params[:id])
 
-    # Tabs logic
-    @tabs = Tab.find_all_from_user(current_user.id)
-    @new = Tab.new
-    @tab = Tab.find_by_id(params[:id])
+      # Tabs logic
+      @tabs = Tab.find_all_from_user(current_user.id)
+      @new = Tab.new
+      @tab = Tab.find_by_id(params[:id])
 
-    # Checklists Logic
-    @checklist = Checklist.new
-    @checklists = Checklist.find_all(params[:id])
-    @checklist_items = ChecklistItem.find_all(params[:id])
-    @checklist_item = ChecklistItem.new
+      # Checklists Logic
+      @checklist = Checklist.new
+      @checklists = Checklist.find_all(params[:id])
+      @checklist_items = ChecklistItem.find_all(params[:id])
+      @checklist_item = ChecklistItem.new
 
-    # Notes Logic
-    @note= Note.new
-    @notes = Note.find_all(params[:id])
+      # Notes Logic
+      @note= Note.new
+      @notes = Note.find_all(params[:id])
 
-    # PointLists Logic
-    @pointlists = Pointlist.find_all(params[:id])
-    @pointlist = Pointlist.new
-    @pointlist_items = PointlistItem.find_all_items(params[:id])
-    @pointlist_item = PointlistItem.new
+      # PointLists Logic
+      @pointlists = Pointlist.find_all(params[:id])
+      @pointlist = Pointlist.new
+      @pointlist_items = PointlistItem.find_all_items(params[:id])
+      @pointlist_item = PointlistItem.new
+    else
+      flash[:alert] = "Tab was deleted"
+      redirect_to tabs_path
+    end
   end
 
   def create
@@ -48,22 +53,28 @@ class TabsController < ApplicationController
   end
 
   def update
-    id = Tab.update(params[:tab][:id], params[:tab][:titulo])
-    if id 
-      flash[:notice] = "Tab title updated"
+    if Tab.validate_title(params[:tab][:titulo])
+      id = Tab.update(params[:tab][:id], params[:tab][:titulo])
+      if id 
+        flash[:notice] = "Tab title updated"
+      else
+        flash[:alert] = "Could not update tab name"
+      end
     else
-      flash[:alert] = "Could not update tab name"
+      flash[:alert] = "The title cannot be empty nor too long(10 chars max)"
     end
 
     redirect_to :back
   end
+
+  def destroy
+    Tab.destroy(params[:id])
+    flash[:notice] = "Tab was deleted"
+    redirect_to tabs_path
+  end
   
   
   private
-
-  def get_all_items
-
-  end
 
   def tab_params
     params.require(:tab).permit(:titulo)
