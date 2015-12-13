@@ -8,22 +8,33 @@ class UsersController < ApplicationController
 
   def create
     user_repeated = User.find_with_email(user_params[:email])
-    if !user_params[:email].blank? && !user_params[:password].blank? && !user_params[:password_confirmation].blank?
-      if !user_repeated.nil?
-        flash[:alert] = "Username already in use"
-        @user = User.new
-        render "new"
-      else
-        id = User.create(user_params[:email], user_params[:password])
-        if id
-          flash[:notice] = "User successfully created"
-          session[:user_id] = id.values.first.first
-    		  redirect_to tabs_path
-    	  else
+    blanks = !user_params[:email].blank? &&
+             !user_params[:password].blank? &&
+             !user_params[:password_confirmation].blank?
+
+    if blanks
+      if User.validate_email(user_params[:email])
+        if !user_repeated.nil?
+          flash[:alert] = "Username already in use"
           @user = User.new
-          flash[:alert] = 'Could not create user'
-    		  render "new"
-    	  end
+          render "new"
+        else
+          id = User.create(user_params[:email], user_params[:password])
+
+          if id
+            flash[:notice] = "User successfully created"
+            session[:user_id] = id.values.first.first
+            redirect_to tabs_path
+          else
+            @user = User.new
+            flash[:alert] = 'Could not create user'
+            render "new"
+          end
+        end
+      else
+        @user = User.new
+        flash[:alert] = "Invalid email"
+        render "new"
       end
     else
       flash[:alert] = 'All fields are mandatory'

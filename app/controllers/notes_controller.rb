@@ -1,11 +1,15 @@
 class NotesController < ApplicationController
 
   def create
-    id = Note.create(params[:note][:tab_id], params[:note][:title], params[:note][:description]) 
-    if id
-      flash[:notice] = "Note created successfully"
+    if !params[:note][:title].empty? && !params[:note][:description].empty?
+      id = Note.create(params[:note][:tab_id], params[:note][:title], params[:note][:description]) 
+      if id
+        flash[:notice] = "Note created successfully"
+      else
+        flash[:alert] = "Error while creating a note"
+      end
     else
-      flash[:alert] = "Error while creating a note"
+      flash[:alert] = "You cannot have a note with an empty description and/or title"
     end
     redirect_to :back
   end

@@ -1,5 +1,7 @@
 class Checklist < ActiveRecord::Base
 
+  TITLE_SIZE = 20
+
   def self.find_by_id(checklist_id)
     select_query = "SELECT * FROM checklists WHERE id = '#{checklist_id}'"
     return Checklist.find_by_sql(select_query).first
@@ -28,6 +30,10 @@ class Checklist < ActiveRecord::Base
     sql_connection.execute(items_deletion_query)
     sql_connection.execute(deletion_query)
     sql_connection.execute("COMMIT")
+  end
+
+  def self.validate_title(title)
+    !title.empty? && title.size < TITLE_SIZE
   end
 
 end
