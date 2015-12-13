@@ -6,9 +6,9 @@
         <li class="tabs">
           <%= link_to tab.titulo, tab_path(tab.id) %>
           <%= image_tag("edit.svg", :alt => "edit", :onclick => "edita()", :class => "edita") %>
-          <!--  image_tag("edit.svg", :alt => "edit", :onclick => "edita()", :class => "edita#{tab.id}") %> -->
+          <!--  image_tag("edit.svg", :alt => "edit", :onclick => edita(), :class => "edita#{tab.id}") %> -->
         </li>
-        <div class="update <%= "#{tab.id}" %>">
+        <div class="update <%= "item#{tab.id}" %>">
         <%= form_for tab do |f2| %>
           <%= hidden_field :tab, :id, value: tab.id %>
           <%= f2.text_field :titulo, class: 'texto'%>
@@ -18,7 +18,11 @@
       <% end %>
     </ul>
 
-
+    <script>
+      function edita() {
+        $(".update").css( "display", "block" );
+      };
+    </script>
 
 
   <!--------------------------------------------------CRIAR NOVA TAB------------------------------------------------------------------>  
@@ -30,13 +34,6 @@
       <%= f.submit "create" , class: 'create'%>
     <% end %>
   </div>
-
-    <div id='ct'>
-      <%= form_for @new do |f| %>
-        <%= f.text_field :titulo %>
-        <%= f.submit "create" , class: 'create'%>
-      <% end %>
-    </div>
 
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" id= "new">new tab</button>
@@ -62,37 +59,49 @@
     </div>
 
   <!--------------------------------------------------FIM   CRIAR NOVA TAB------------------------------------------------------------------> 
-  <h3 id="share">share tab</h3>
-  <%= form_for @share do |f| %>
-    <%= hidden_field :share, :tab_id, value: @tab.id %>
 
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-    <%= f.submit "Share" %>
-  <% end %>
 
-  <ul>
-    <% @users.each do |user| %>
-      <li>
-        <%= user.email %>
-      </li>
-    <% end %>
+<!-- Button trigger modal -->
+<p><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal1" id= "share">share</button></p>
 
+    <!-- Modal -->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Share this tab with user</h4>
+          </div>
+          <%= form_for @share do |f| %>
+          <%= hidden_field :share, :tab_id, value: @tab.id %>
+            <div class="modal-body">
+              <%= f.text_field :email,  class: 'texto' %>
+            </div>
+            <div class="modal-footer">
+               <%= f.submit "Share", class: 'share btn btn-default'%>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  <div id="line"></div>
+    <p class="belongs">This tab belongs to:</p>
     <ul>
       <% @users.each do |user| %>
-        <li>
+        <li class="pessoa">
           <%= user.email %>
         </li>
       <% end %>
     </ul>
 
-    <%= link_to "Go back", tabs_path %>
+    
   </div>
 
   <!--------------------------------------------------INTERIOR (CHECKS, NOTES, POINTS)------------------------------------------------------------------> 
 
   <div class="col-md-10">
-    <p><%= @tab.titulo %></p>
+    <p class="titulo"><%= @tab.titulo %></p>
     <div>
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
@@ -228,14 +237,16 @@
 
 
   </div>
-<script>
+  
+  <!--
+<script>/*
   function edita() {
     console.log("poop");
   $('.update' ).css( "display", "block" );
 };
   
 </script>
-      <script>
+      <script>/*
         var controla = false;
         function edita() {
           if(controla==false){
@@ -256,4 +267,4 @@ $('.update').css("display", "block");
     controla=false;
     }
     };*/
-  </script>
+  </script> -->

@@ -4,23 +4,30 @@
 
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700,800,900,100,200);
 
+.body{
+    font-family: 'Raleway', sans-serif;
+    margin-top: 100px;
+}
+
 #ct {
     display:none;
 }
 #new {
-    font-size:20px;
+    font-size:18px;
     font-weight:300;
     margin-left: 1%;
     background:none;
     border:none;
-    margin-top:15px;
+    margin-top:10px;
 }
 
 #share {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 300;
-    margin-left: 5%;
-    margin-top: 10px;
+    margin-left: 1%;
+    margin-top: 5px;
+    background: none;
+    border: none;
 }
 
 .create{
@@ -36,10 +43,24 @@
     border-bottom-style: solid;
     border-bottom-width: 1px;
     margin-left: 5%;
+    margin-top: -4px;
+}
+
+.belongs {
+    font-size: 18px;
+    margin-left: 15px;
+    margin-top: 15px;
+    font-weight: 400;
+}
+
+.pessoa {
+    list-style-type: circle;
+    font-size: 18px;
+    font-weight: 300;
 }
 
 .update{
-    font-size:20px;
+    font-size:18px;
     display: none;
     padding-bottom:11px;
     margin-top: -35px;
@@ -59,7 +80,7 @@
 }
 
 .tabs a{
-    font-size:20px;
+    font-size:18px;
     font-weight:300;
     text-decoration: none;
     color: black;
@@ -69,13 +90,8 @@
     width:120%;
 }
 
-.body{
-    font-family: 'Raleway', sans-serif;
-    margin-top: 50px;
-}
-
 #lista_tabs{
-    margin-top:90px;
+    margin-top: 90px;
     margin-left:-9%;
 }
 
@@ -91,4 +107,28 @@
 
 .edita{
     width: 22px;
+}
+
+.titulo{
+    background: linear-gradient(135deg, #7ffdec 0%, #73ff9f 57%, #73ff9f 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+    font-size: 50px;
+}
+
+.tabs a:hover{
+    background: linear-gradient(135deg, #7ffdec 0%, #73ff9f 57%, #73ff9f 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+    text-decoration:none;
+}
+
+#share:focus {
+    background-color: none;
+    border-color: none;
+}
+#share:hover {
+    text-decoration: none;
+    background-color: none;
+    border-color: none;
 }
