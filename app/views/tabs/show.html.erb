@@ -4,6 +4,7 @@
     <ul id="lista_tabs">
       <% @tabs.each do |tab| %>
         <li class="tabs">
+        <%= link_to "x", tab_path(tab.id), method: :delete %>
           <%= link_to tab.titulo, tab_path(tab.id) %>
           <%= image_tag "edit.svg", alt: "edit", class: "edita", onclick: "$('.tab#{tab.id}\').css('display', 'block')" %>
           <!--  image_tag("edit.svg", :alt => "edit", :onclick => "edita()", :class => "edita#{tab.id}") %> -->
@@ -110,7 +111,7 @@
             <ul>
               <% @checklists.each do |checklist| %>
                 <li>
-                  <%= link_to checklist.title, checklist_path(checklist.id) %>
+                  <%= checklist.title %>
                   <%= link_to "x", checklist_path(checklist.id), method: :delete %>
                 </li>
 

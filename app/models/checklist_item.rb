@@ -48,4 +48,5 @@ class ChecklistItem < ActiveRecord::Base
 
     id = sql_connection.execute(insert_query)
   end
+
 end

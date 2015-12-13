@@ -48,22 +48,28 @@ class TabsController < ApplicationController
   end
 
   def update
-    id = Tab.update(params[:tab][:id], params[:tab][:titulo])
-    if id 
-      flash[:notice] = "Tab title updated"
+    if Tab.validate_title(params[:tab][:titulo])
+      id = Tab.update(params[:tab][:id], params[:tab][:titulo])
+      if id 
+        flash[:notice] = "Tab title updated"
+      else
+        flash[:alert] = "Could not update tab name"
+      end
     else
-      flash[:alert] = "Could not update tab name"
+      flash[:alert] = "The title cannot be empty nor too long(10 chars max)"
     end
 
+    redirect_to :back
+  end
+
+  def destroy
+    Tab.destroy(params[:id])
+    flash[:notice] = "Tab was deleted"
     redirect_to :back
   end
   
   
   private
-
-  def get_all_items
-
-  end
 
   def tab_params
     params.require(:tab).permit(:titulo)

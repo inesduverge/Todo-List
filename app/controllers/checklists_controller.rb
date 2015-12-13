@@ -1,11 +1,5 @@
 class ChecklistsController < ApplicationController
 
-  def show
-    @checklist = Checklist.find_by_id(params[:id])
-    @checklist_item = ChecklistItem.new
-    @checklist_items = ChecklistItem.find_by_checklist(params[:id])
-  end
-
   def create
     if Checklist.validate_title(params[:checklist][:title])
       id = Checklist.create(params[:checklist][:tab_id], params[:checklist][:title]) 
