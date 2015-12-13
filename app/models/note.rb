@@ -20,6 +20,13 @@ class Note < ActiveRecord::Base
     return id
   end
 
+  def self.update(note)
+    sql_connection = ActiveRecord::Base.connection
+    update_query = "UPDATE notes SET title='#{note[:title]}', description='#{note[:description]}', updated_at='#{Time.now}' WHERE id='#{note[:id]}'"
+
+    return connection.execute(update_query)
+  end
+
   def self.destroy(id)
     sql_connection = ActiveRecord::Base.connection
 

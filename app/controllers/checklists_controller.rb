@@ -14,6 +14,20 @@ class ChecklistsController < ApplicationController
     redirect_to :back
   end
 
+  def update
+    if Checklist.validate_title(params[:checklist][:title])
+      id = Checklist.update(params[:checklist])
+      if id
+        flash[:notice] = "Checklist title was updated"
+      else
+        flash[:alert] = "Could not update checklist title"
+      end
+    else
+      flash[:alert] = "Title too long/empty"
+    end
+    redirect_to :back
+  end
+
   def destroy
     Checklist.destroy(params[:id])
     flash[:notice] = "Checklist was deleted"

@@ -14,6 +14,20 @@ class NotesController < ApplicationController
     redirect_to :back
   end
 
+  def update
+    if Note.validate(params[:note])
+      id = Note.update(params[:note])
+      if id
+        flash[:notice] = "Note successfully updated"
+      else
+        flash[:alert] = "You were not able to update the note"
+      end
+    else
+      flash[:alert] = "You cannot update a note with empty parameters"
+    end
+    redirect_to :back
+  end
+
   def destroy
     Note.destroy(params[:id])
     flash[:notice] = "Note was deleted"

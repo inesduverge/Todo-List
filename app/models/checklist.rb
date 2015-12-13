@@ -12,6 +12,12 @@ class Checklist < ActiveRecord::Base
     return Checklist.find_by_sql(select_query)
   end
 
+  def self.update(checklist)
+    sql_connection = ActiveRecord::Base.connection
+    update_query = "UPDATE checklists SET title='#{checklist[:title]}' WHERE id='#{checklist[:id]}'"
+    return sql_connection.execute(update_query)
+  end
+
   def self.create(tab_id, title)
     sql_connection = ActiveRecord::Base.connection
     insertion_query = "INSERT INTO checklists (tab_id, title, updated_at, created_at) values ('#{tab_id}', '#{title}', '#{Time.now}', '#{Time.now}') RETURNING id"

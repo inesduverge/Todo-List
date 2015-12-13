@@ -7,29 +7,34 @@ class TabsController < ApplicationController
 
   def show
     # Share logic
-    @share = Share.new
-    @users = User.find_all_from_tab(params[:id])
+    if !Tab.find_with_id(params[:id]).nil?
+      @share = Share.new
+      @users = User.find_all_from_tab(params[:id])
 
-    # Tabs logic
-    @tabs = Tab.find_all_from_user(current_user.id)
-    @new = Tab.new
-    @tab = Tab.find_by_id(params[:id])
+      # Tabs logic
+      @tabs = Tab.find_all_from_user(current_user.id)
+      @new = Tab.new
+      @tab = Tab.find_by_id(params[:id])
 
-    # Checklists Logic
-    @checklist = Checklist.new
-    @checklists = Checklist.find_all(params[:id])
-    @checklist_items = ChecklistItem.find_all(params[:id])
-    @checklist_item = ChecklistItem.new
+      # Checklists Logic
+      @checklist = Checklist.new
+      @checklists = Checklist.find_all(params[:id])
+      @checklist_items = ChecklistItem.find_all(params[:id])
+      @checklist_item = ChecklistItem.new
 
-    # Notes Logic
-    @note= Note.new
-    @notes = Note.find_all(params[:id])
+      # Notes Logic
+      @note= Note.new
+      @notes = Note.find_all(params[:id])
 
-    # PointLists Logic
-    @pointlists = Pointlist.find_all(params[:id])
-    @pointlist = Pointlist.new
-    @pointlist_items = PointlistItem.find_all_items(params[:id])
-    @pointlist_item = PointlistItem.new
+      # PointLists Logic
+      @pointlists = Pointlist.find_all(params[:id])
+      @pointlist = Pointlist.new
+      @pointlist_items = PointlistItem.find_all_items(params[:id])
+      @pointlist_item = PointlistItem.new
+    else
+      flash[:alert] = "Tab was deleted"
+      redirect_to tabs_path
+    end
   end
 
   def create
@@ -65,7 +70,7 @@ class TabsController < ApplicationController
   def destroy
     Tab.destroy(params[:id])
     flash[:notice] = "Tab was deleted"
-    redirect_to :back
+    redirect_to tabs_path
   end
   
   
