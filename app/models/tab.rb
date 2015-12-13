@@ -1,5 +1,7 @@
 class Tab < ActiveRecord::Base
 
+  TITLE_SIZE = 10
+
   def self.find_all_from_user(user_id)
     select_query = "SELECT t.* FROM shares s, tabs t WHERE t.id = s.tab_id  AND s.user_id = '#{user_id}' ORDER BY t.created_at"
     self.find_by_sql(select_query)
@@ -52,6 +54,10 @@ class Tab < ActiveRecord::Base
     query = "UPDATE tabs SET titulo='#{titulo}' WHERE id='#{id}'"
     connection = ActiveRecord::Base.connection
     return connection.execute(query)
+  end
+
+  def self.validate_title(title)
+    !title.empty? && title.size < TITLE_SIZE
   end
 
 end

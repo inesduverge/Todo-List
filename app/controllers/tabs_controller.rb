@@ -34,20 +34,17 @@ class TabsController < ApplicationController
 
   def create
     @user = current_user
-    if !tab_params[:titulo].empty?
+    if Tab.validate_title(tab_params[:titulo])
       tab_id = Tab.create(tab_params[:titulo], @user.id)
       if tab_id
-        #@tab = Tab.find_with_id(tab_id.values.first.first)
-        #redirect_to tabs_path
-        redirect_to :back
+        flash[:notice] = "Tab created successfully"
       else
         flash[:alert] = 'There was an error trying to create a tab for you'
-        redirect_to tabs_path
       end
     else
-      flash[:alert] = "Tab title cannot be empty"
-      redirect_to tabs_path
+      flash[:alert] = "Tab title is either empty or too long(10 chars max)"
     end
+    redirect_to :back
   end
 
   def update
