@@ -4,9 +4,9 @@
     <ul id="lista_tabs">
       <% @tabs.each do |tab| %>
         <li class="tabs">
-        <%= link_to "x", tab_path(tab.id), method: :delete %>
           <%= link_to tab.titulo, tab_path(tab.id) %>
           <%= image_tag "edit.svg", alt: "edit", class: "edita", onclick: "$('.tab#{tab.id}\').css('display', 'block')" %>
+          <%= link_to "x", tab_path(tab.id), method: :delete , class: 'x'%>
           <!--  image_tag("edit.svg", :alt => "edit", :onclick => "edita()", :class => "edita#{tab.id}") %> -->
         </li>
         <div class="update <%= "tab#{tab.id}" %>">
@@ -113,19 +113,24 @@
             <ul>
               <% @checklists.each do |checklist| %>
                 <li class="lista">
-                  <%= checklist.title, class: 'nomeC' %>
+                  <span class= "nomeC"> 
+                  <%= checklist.title%></span>
+                  <%= image_tag "edit.svg", alt: "edit", class: "edita", onclick: "$('.checklist#{checklist.id}\').css('display', 'block')" %>
                   <%= link_to "x", checklist_path(checklist.id), method: :delete, class: 'x' %>
+                  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2" id= "inn">+</button>
+                </li>
+                <div class="update <%= "checklist#{checklist.id}" %>">
                   <%= form_for checklist do |f16| %>
                     <%= hidden_field :checklist, :id, value: checklist.id %>
-                    <%= f16.text_field :title %>
-                    <%= f16.submit "Update" %>
+                    <%= f16.text_field :title, class: 'texto2' %>
+                    <%= f16.submit "", class: 'bot2' %>
                   <% end %>
-                </li>
+                </div>
 
                 <%# Form para criar um item na checklist %>
                 
                   <!-- Button trigger modal -->
-    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2" id= "inn">new item</button>
+    
 
     <!-- Modal -->
     <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -151,14 +156,23 @@
                   <%# Apresentação de cada item de uma checklist %>
                   <% if !@checklist_items[checklist.id].nil? %>
                     <% @checklist_items[checklist.id].each do |item| %>
-                      <li class="item"><%= item.description %></li>
-                      <%= form_for item do |f3| %>
+                      <li class="item">
+                      <%= item.description %>
+                      <%= image_tag "edit.svg", alt: "edit", class: "edita", onclick: "$('.checklist_item#{item.id}\').css('display', 'block')" %>
+                      </li>
+                      
+                      <div class="update <%= "checklist_item#{item.id}" %>">
+                        <%= form_for item do |f3| %>
                         <%= hidden_field :checklist_item, :id, value: item.id %>
-                        <%= hidden_field :checklist_item, :checklist_id, value: item.checklist_id %>
-                        <%= f3.text_field :description %>
-                        <%= f3.check_box :state %>
-                        <%= f3.submit "Update" %>
-                      <% end %>
+                        <%= f3.text_field :description, class: 'texto2' %>
+                        <%= f3.submit "", class: 'bot2' %>
+                        <% end %>
+                </div>
+                <%= form_for item do |f3| %>
+                <%= hidden_field :checklist_item, :id, value: item.id %>
+                <%= hidden_field :checklist_item, :checklist_id, value: item.checklist_id %>
+                <%= f3.check_box :state, class: 'caixa' %>  
+                <% end %>
                     <% end %>
                   <% end %>
                 </ul>
