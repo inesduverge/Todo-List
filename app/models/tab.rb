@@ -1,7 +1,7 @@
 class Tab < ActiveRecord::Base
 
   def self.find_all_from_user(user_id)
-    select_query = "SELECT t.* FROM shares s, tabs t WHERE t.id = s.tab_id  AND s.user_id = '#{user_id}'"
+    select_query = "SELECT t.* FROM shares s, tabs t WHERE t.id = s.tab_id  AND s.user_id = '#{user_id}' ORDER BY t.created_at"
     self.find_by_sql(select_query)
   end
 
