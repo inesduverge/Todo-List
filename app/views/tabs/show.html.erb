@@ -98,36 +98,54 @@
     <div>
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Checklists</a></li>
+        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" id="titC">Checklists</a></li>
         <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Notes</a></li>
         <li role="presentation"><a href="#pointlist" aria-controls="messages" role="tab" data-toggle="tab">Pointlist</a></li>
       </ul>
-
+<!--------------------------------------------------CHECKS------------------------------------------------------------------> 
       <!-- Tab panes -->
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="home">
+          
+    
           <ul>
             <ul>
               <% @checklists.each do |checklist| %>
-                <li>
-                  <%= link_to checklist.title, checklist_path(checklist.id) %>
-                  <%= link_to "x", checklist_path(checklist.id), method: :delete %>
+                <li class="lista">
+                  <%= link_to checklist.title, checklist_path(checklist.id), class: 'nomeC' %>
+                  <%= link_to "x", checklist_path(checklist.id), method: :delete, class: 'x' %>
                 </li>
 
                 <%# Form para criar um item na checklist %>
-                <%= form_for @checklist_item do |f4| %>
-                  <%= hidden_field :checklist_item, :checklist_id, value: checklist.id %>
-                  <%= f4.label :description %>
-                  <%= f4.text_area :description %>
+                
+                  <!-- Button trigger modal -->
+    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2" id= "inn">new item</button>
 
-                  <%= f4.submit "Create" %>
-                <% end %>
-
-                <ul>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Create new item</h4>
+          </div>
+           <%= form_for @checklist_item do |f4| %>
+           <%= hidden_field :checklist_item, :checklist_id, value: checklist.id %>
+            <div class="modal-body">
+              <%= f4.text_area :description, class: 'texto'%>
+            </div>
+            <div class="modal-footer">
+              <%= f4.submit "Create", class: 'create btn btn-default'%>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+            <ul>
                   <%# Apresentação de cada item de uma checklist %>
                   <% if !@checklist_items[checklist.id].nil? %>
                     <% @checklist_items[checklist.id].each do |item| %>
-                      <li><%= item.description %></li>
+                      <li class="item"><%= item.description %></li>
                       <%= form_for item do |f3| %>
                         <%= hidden_field :checklist_item, :id, value: item.id %>
                         <%= hidden_field :checklist_item, :checklist_id, value: item.checklist_id %>
@@ -141,18 +159,32 @@
               <% end %>
             </ul>
 
-            <h3>Create a checklist</h3>
-            <%= form_for @checklist do |f| %>
-              <%= hidden_field :checklist, :tab_id, value: @tab.id %>
-
-              <%= f.label :title %>
-              <%= f.text_field :title %>
-
-              <%= f.submit "Create" %>
-            <% end %>
           </ul>
         </div>
 
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal3" id= "in">new checklist</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Create new checklist</h4>
+          </div>
+           <%= form_for @checklist do |f| %>
+              <%= hidden_field :checklist, :tab_id, value: @tab.id %>
+            <div class="modal-body">
+              <%= f.text_field :title, class: 'texto'%>
+            </div>
+            <div class="modal-footer">
+              <%= f.submit "Create", class: 'create btn btn-default'%>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+<!-------------------------------------------------- NOTES, ------------------------------------------------------------------> 
         <div role="tabpanel" class="tab-pane" id="profile">
           <ul>
             <% @notes.each do |note| %>
@@ -175,6 +207,8 @@
                 <%= f.submit "Create" %>
               <% end %>
             </div>
+            
+  <!--------------------------------------------------POINTS------------------------------------------------------------------>           
             <div role="tabpanel" class="tab-pane" id="pointlist">
               <ul>
                 <% @pointlists.each do |pointlist| %>
