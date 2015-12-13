@@ -68,9 +68,10 @@
 }
 
 .pessoa {
-    list-style-type: circle;
-    font-size: 18px;
+    list-style-type: none;
+    font-size: 15px;
     font-weight: 300;
+    margin-left: -22px;
 }
 
 .update{
@@ -86,7 +87,7 @@
     border-style: none;
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    width:80%;
+    width:auto;
 }
 
 .tabs{
@@ -197,14 +198,38 @@
     border-style: none;
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    width: 300px;
+    width: auto;
     font-size: 25px;
     font-weight: 400;
     margin-left: -60px;
     color: #999;
-    margin-top: -1px;
+    margin-top: -15px;
 }
 
+.texto3 {
+    outline: none;
+    border-style: none;
+    width: auto;
+    font-size: 18px;
+    font-weight: 400;
+    margin-left: 0px;
+    color: #666;
+    margin-top: 0px;
+}
+
+span.coco {
+    display: inline-flex;
+}
+
+.bot3{
+    border: none;
+    margin-left: 0px;
+    background: url(done.svg);
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 23px;
+    background-size: 30px auto;
+}
 
 #inn {
     color: #76FEB0;
@@ -223,4 +248,17 @@
     text-decoration: none;
     font-weight: 700 !important;
     font-size: 20px;
+}
+
+li.item {
+    list-style-type: circle;
+    font-size: 18px;
+    color: #666666;
+    margin-left: -60px;
+}
+
+input.checklist
+{
+width: 50x;
+height: 50px;
 }

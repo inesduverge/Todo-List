@@ -5,9 +5,8 @@
       <% @tabs.each do |tab| %>
         <li class="tabs">
           <%= link_to tab.titulo, tab_path(tab.id) %>
-          <%= image_tag "edit.svg", alt: "edit", class: "edita", onclick: "$('.tab#{tab.id}\').css('display', 'block')" %>
+          <%= image_tag "edit.svg", alt: "edit", class: "edita", onclick: "$('.tab#{tab.id}').css('display', 'block')" %>
           <%= link_to "x", tab_path(tab.id), method: :delete , class: 'x'%>
-          <!--  image_tag("edit.svg", :alt => "edit", :onclick => "edita()", :class => "edita#{tab.id}") %> -->
         </li>
         <div class="update <%= "tab#{tab.id}" %>">
         <%= form_for tab do |f2| %>
@@ -113,7 +112,7 @@
             <ul>
               <% @checklists.each do |checklist| %>
                 <li class="lista">
-                  <span class= "nomeC"> 
+                  <span class= "nomeC">
                   <%= checklist.title%></span>
                   <%= image_tag "edit.svg", alt: "edit", class: "edita", onclick: "$('.checklist#{checklist.id}\').css('display', 'block')" %>
                   <%= link_to "x", checklist_path(checklist.id), method: :delete, class: 'x' %>
@@ -157,22 +156,17 @@
                   <% if !@checklist_items[checklist.id].nil? %>
                     <% @checklist_items[checklist.id].each do |item| %>
                       <li class="item">
-                      <%= item.description %>
-                      <%= image_tag "edit.svg", alt: "edit", class: "edita", onclick: "$('.checklist_item#{item.id}\').css('display', 'block')" %>
+                      <%= form_for item do |f3| %>
+                      <span class="coco">
+                      <%= f3.text_field :description, class: 'texto3' %>
+                      <%= f3.check_box :state, class: 'checkbox' %>
+                      </span>
+                      <%#= image_tag "edit.svg", alt: "edit", class: "edita", onclick: "$('.checklist_item#{item.id}').css('display', 'block')" %>
+                      <%= hidden_field :checklist_item, :id, value: item.id %>
+                      <%= hidden_field :checklist_item, :checklist_id, value: item.checklist_id %>
+                      <%= f3.submit "", class: 'bot3' %>
+                      <% end %>
                       </li>
-                      
-                      <div class="update <%= "checklist_item#{item.id}" %>">
-                        <%= form_for item do |f3| %>
-                        <%= hidden_field :checklist_item, :id, value: item.id %>
-                        <%= f3.text_field :description, class: 'texto2' %>
-                        <%= f3.submit "", class: 'bot2' %>
-                        <% end %>
-                </div>
-                <%= form_for item do |f3| %>
-                <%= hidden_field :checklist_item, :id, value: item.id %>
-                <%= hidden_field :checklist_item, :checklist_id, value: item.checklist_id %>
-                <%= f3.check_box :state, class: 'caixa' %>  
-                <% end %>
                     <% end %>
                   <% end %>
                 </ul>
@@ -293,35 +287,14 @@
 
 
   </div>
-<!--<script>
-  function edita() {
-    console.log("poop");
-  $('.update' ).css( "display", "block" );
-};
-  
-</script>-->
-<!--<script>
-        var controla = false;
-        function edita() {
-          if(controla==false){
-            console.log("ola");
-          }
-        }
-      </script>-->
-<!--<script>
- /* var controla = false;
-function edita() {
-    if(controla==false){
-    
+<script>
+  function resizeInput() {
+    $(this).attr('size', $(this).val().length);
+}
 
-$('.update').css("display", "block");  
-    controla=true;
-    }
-    else if(controla==true){
- 
-
-   $('.update').css("display", "none");  
-    controla=false;
-    }
-    };*/
-  </script>-->
+$('input[type="text"]')
+    // event handler
+    .keyup(resizeInput)
+    // resize on page load
+    .each(resizeInput);
+  </script>
