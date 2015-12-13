@@ -1,3 +1,130 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700,800,900,100,200);
+
+.user_nav{
+position:absolute;
+	right:35px;
+	top:35px;
+	text-align:right;
+	font-family: 'Raleway', sans-serif;
+    font-weight:300;
+}
+.logout{
+	color:#7FFDED;
+}
+.logout:hover{
+	color:#7FFDED;
+	text-decoration:none;
+}
+
+
+
+
+input:focus, textarea:focus {
+    outline: none;
+}
+
+
+.fundo{
+    font-family: 'Raleway', sans-serif;
+    font-weight:300;
+}
+
+	.signup_container{
+		position:absolute;
+		background-color:rgba(255,255,255,0.3);
+		width:30%;
+		left:35%;
+		right:35%;
+		text-align:center;
+		padding-top:40px;
+		padding-bottom:30px;
+		margin-top:140px;
+		border:3px solid #7FFDED;
+
+		.title{
+		margin-bottom: 60px;
+	    font-weight: 300;
+	    font-size: 4em;
+	    font-variant: small-caps;
+		}
+
+		.label{
+		font-weight: 300;
+		color:black;
+		font-size:1em;
+		}
+
+		label{
+		font-weight:300;
+		}
+
+		.textfield{
+		background-color:rgba(0,0,0,0);
+		border:none;
+		border-bottom:1px solid;
+		width: 70%;
+		text-align:center;
+		margin-top:2%;
+		}
+
+		.area{
+			margin-top:55px;
+		}
+
+		input[type="submit"]{
+			font-variant:small-caps;
+			font-size: 16px;
+    		letter-spacing: 1px;
+			width:70%;
+			padding-top:2%;
+			padding-bottom:2%;
+			border-image: none;
+		    border: 2px solid #7FFDED;;
+		    background-color: rgba(0,0,0,0);
+			margin-top:10%;
+			margin-bottom:1%;
+			  -o-transition:.2s;
+			  -ms-transition:.2s;
+			  -moz-transition:.2s;
+			  -webkit-transition:.2s;
+			  /* ...and now for the proper property */
+			  transition:.2s;
+		}
+
+		input[type="submit"]:hover{	
+		    border: 2px solid rgba(0, 0,0,0);;
+    		background-color: rgba(55, 224, 210, 0.3);
+		}
+
+		.logsign{
+			color:black;
+			font-weight:300;
+			font-size:10px;
+
+		}
+		.logsign:hover{
+			text-decoration:none;
+
+		}
+
+}
+
+
+
+@media screen and (max-width: 1160px) {
+    .signup_container{
+        width:60%;
+		left:20%;
+		right:20%;
+    }
+}
+
+
+
+	
+
+

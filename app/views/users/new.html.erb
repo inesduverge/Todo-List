@@ -1,17 +1,24 @@
-<h1>Sign up</h1>
+<div class="fundo">
+	<div class="signup_container">
+		<h1 class="title">sign up</h1>
 
-<%= form_for @user do |f| %>
-	<p>
-		<%= f.label :email %><br />
-		<%= f.text_field :email %>
-	</p>	
-	<p>
-		<%= f.label :password %><br />
-		<%= f.password_field :password %>
-	</p>	
-	<p>
-		<%= f.label :password_confirmation %><br />
-		<%= f.password_field :password_confirmarion %>
-	</p>	
-	<p class="button"><%= f.submit %></p>
-<% end %>
+		<%= form_for @user do |f| %>
+			<p class="area">
+				<%= f.label :email, class: 'label' %><br />
+				<%= f.text_field :email, class: 'textfield' %>
+			</p>	
+			<p class="area">
+				<%= f.label :password, class: 'label'%><br />
+				<%= f.password_field :password, class: 'textfield' %>
+			</p>	
+			<p class="area">
+				<%= f.label :password_confirmation, class: 'label' %><br />
+				<%= f.password_field :password_confirmation, class: 'textfield' %>
+			</p>	
+			<p><%= f.submit "sign up"%></p>
+		<% end %>
+
+			    <%= link_to "Already have an account?", log_in_path, class: 'logsign' %>
+
+	</div>
+</div>

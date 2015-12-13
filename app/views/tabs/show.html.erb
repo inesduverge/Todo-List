@@ -1,33 +1,24 @@
 
 <div class="body">
-
-
-
-<div class="col-md-2">
-  <ul id="lista_tabs">
-    <% @tabs.each do |tab| %>
-      <li class="tabs">
-        <%= link_to tab.titulo, tab_path(tab.id) %>
-        <%= image_tag("edit.svg", :alt => "edit", :onclick => "edita()", :class => "edita") %>
-        <!--  image_tag("edit.svg", :alt => "edit", :onclick => "edita()", :class => "edita#{tab.id}") %> -->
-      </li>
-      <div class="update <%= "#{tab.id}" %>">
-      <%= form_for tab do |f2| %>
-        <%= hidden_field :tab, :id, value: tab.id %>
-        <%= f2.text_field :titulo, class: 'texto'%>
-        <%= f2.submit " ", class: 'bot' %>
+  <div class="col-md-2">
+    <ul id="lista_tabs">
+      <% @tabs.each do |tab| %>
+        <li class="tabs">
+          <%= link_to tab.titulo, tab_path(tab.id) %>
+          <%= image_tag("edit.svg", :alt => "edit", :onclick => "edita()", :class => "edita") %>
+          <!--  image_tag("edit.svg", :alt => "edit", :onclick => "edita()", :class => "edita#{tab.id}") %> -->
+        </li>
+        <div class="update <%= "#{tab.id}" %>">
+        <%= form_for tab do |f2| %>
+          <%= hidden_field :tab, :id, value: tab.id %>
+          <%= f2.text_field :titulo, class: 'texto'%>
+          <%= f2.submit " ", class: 'bot' %>
+        <% end %>
+        </div>
       <% end %>
-      </div>
-    <% end %>
-  </ul>
+    </ul>
 
-<script>
-  function edita() {
-    console.log("poop");
-  $('.update' ).css( "display", "block" );
-};
-  
-</script>
+
 
 
   <!--------------------------------------------------CRIAR NOVA TAB------------------------------------------------------------------>  
@@ -40,29 +31,35 @@
     <% end %>
   </div>
 
+    <div id='ct'>
+      <%= form_for @new do |f| %>
+        <%= f.text_field :titulo %>
+        <%= f.submit "create" , class: 'create'%>
+      <% end %>
+    </div>
 
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" id= "new">new tab</button>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" id= "new">new tab</button>
 
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Create new tab</h4>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Create new tab</h4>
+          </div>
+          <%= form_for @new do |f| %>
+            <div class="modal-body">
+              <%= f.text_field :titulo , class: 'texto'%>
+            </div>
+            <div class="modal-footer">
+              <%= f.submit "create" , class: 'create btn btn-default'%>
+            </div>
+          <% end %>
         </div>
-        <%= form_for @new do |f| %>
-          <div class="modal-body">
-            <%= f.text_field :titulo , class: 'texto'%>
-          </div>
-          <div class="modal-footer">
-            <%= f.submit "create" , class: 'create btn btn-default'%>
-          </div>
-        <% end %>
       </div>
     </div>
-  </div>
 
   <!--------------------------------------------------FIM   CRIAR NOVA TAB------------------------------------------------------------------> 
   <h3 id="share">share tab</h3>
@@ -80,102 +77,168 @@
         <%= user.email %>
       </li>
     <% end %>
-  </ul>
-  
-  <%= link_to "Go back", tabs_path %>
-</div>
 
-<!--------------------------------------------------INTERIOR (CHECKS, NOTES, POINTS)------------------------------------------------------------------> 
-
-<div class="col-md-10">
-  <p><%= @tab.titulo %></p>
-  <div>
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Checklists</a></li>
-      <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Notes</a></li>
-      <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+    <ul>
+      <% @users.each do |user| %>
+        <li>
+          <%= user.email %>
+        </li>
+      <% end %>
     </ul>
 
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="home"><ul>
+    <%= link_to "Go back", tabs_path %>
+  </div>
+
+  <!--------------------------------------------------INTERIOR (CHECKS, NOTES, POINTS)------------------------------------------------------------------> 
+
+  <div class="col-md-10">
+    <p><%= @tab.titulo %></p>
+    <div>
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Checklists</a></li>
+        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Notes</a></li>
+        <li role="presentation"><a href="#pointlist" aria-controls="messages" role="tab" data-toggle="tab">Pointlist</a></li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="home">
           <ul>
-            <% @checklists.each do |checklist| %>
-              <li>
-                <%= link_to checklist.title, checklist_path(checklist.id) %>
-                <%= link_to "x", checklist_path(checklist.id), method: :delete %>
-              </li>
+            <ul>
+              <% @checklists.each do |checklist| %>
+                <li>
+                  <%= link_to checklist.title, checklist_path(checklist.id) %>
+                  <%= link_to "x", checklist_path(checklist.id), method: :delete %>
+                </li>
 
-              <%# Form para criar um item na checklist %>
-              <%= form_for @checklist_item do |f4| %>
-                <%= hidden_field :checklist_item, :checklist_id, value: checklist.id %>
-                <%= f4.label :description %>
-                <%= f4.text_area :description %>
+                <%# Form para criar um item na checklist %>
+                <%= form_for @checklist_item do |f4| %>
+                  <%= hidden_field :checklist_item, :checklist_id, value: checklist.id %>
+                  <%= f4.label :description %>
+                  <%= f4.text_area :description %>
 
-                <%= f4.submit "Create" %>
-              <% end %>
+                  <%= f4.submit "Create" %>
+                <% end %>
 
-              <ul>
-                <%# Apresentação de cada item de uma checklist %>
-                <% if !@checklist_items[checklist.id].nil? %>
-                  <% @checklist_items[checklist.id].each do |item| %>
-                    <li><%= item.description %></li>
-                    <%= form_for item do |f3| %>
-                      <%= hidden_field :checklist_item, :id, value: item.id %>
-                      <%= hidden_field :checklist_item, :checklist_id, value: item.checklist_id %>
-                      <%= f3.text_field :description %>
-                      <%= f3.check_box :state %>
-                      <%= f3.submit "Update" %>
+                <ul>
+                  <%# Apresentação de cada item de uma checklist %>
+                  <% if !@checklist_items[checklist.id].nil? %>
+                    <% @checklist_items[checklist.id].each do |item| %>
+                      <li><%= item.description %></li>
+                      <%= form_for item do |f3| %>
+                        <%= hidden_field :checklist_item, :id, value: item.id %>
+                        <%= hidden_field :checklist_item, :checklist_id, value: item.checklist_id %>
+                        <%= f3.text_field :description %>
+                        <%= f3.check_box :state %>
+                        <%= f3.submit "Update" %>
+                      <% end %>
                     <% end %>
                   <% end %>
-                <% end %>
-              </ul>
-            <% end %>
-          </ul>
-
-          <h3>Create a checklist</h3>
-          <%= form_for @checklist do |f| %>
-            <%= hidden_field :checklist, :tab_id, value: @tab.id %>
-
-            <%= f.label :title %>
-            <%= f.text_field :title %>
-
-            <%= f.submit "Create" %>
-          <% end %>
-        </ul>
-      </div>
-
-      <div role="tabpanel" class="tab-pane" id="profile">
-        <ul>
-          <% @notes.each do |note| %>
-            <li>
-              <%= note.title%>
-              <%= link_to "x", note_path(note.id), method: :delete %>
-              <p><%= note.description%><p>
-                </li>
+                </ul>
               <% end %>
             </ul>
 
-            <h3>Create a note</h3>
-            <%= form_for @note do |f| %>
-              <%= hidden_field :note, :tab_id, value: @tab.id %>
+            <h3>Create a checklist</h3>
+            <%= form_for @checklist do |f| %>
+              <%= hidden_field :checklist, :tab_id, value: @tab.id %>
 
-              <%= f.label :title%>
-              <%= f.text_field :title%>
-              <%= f.label :description %>
-              <%= f.text_area :description %>
+              <%= f.label :title %>
+              <%= f.text_field :title %>
+
               <%= f.submit "Create" %>
             <% end %>
+          </ul>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="profile">
+          <ul>
+            <% @notes.each do |note| %>
+              <li>
+                <%= note.title %>
+                <%= link_to "x", note_path(note.id), method: :delete %>
+                <p><%= note.description %><p>
+                  </li>
+                <% end %>
+              </ul>
+
+              <h3>Create a note</h3>
+              <%= form_for @note do |f| %>
+                <%= hidden_field :note, :tab_id, value: @tab.id %>
+
+                <%= f.label :title%>
+                <%= f.text_field :title%>
+                <%= f.label :description %>
+                <%= f.text_area :description %>
+                <%= f.submit "Create" %>
+              <% end %>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="pointlist">
+              <ul>
+                <% @pointlists.each do |pointlist| %>
+                  <li>
+                    <%= pointlist.title %>
+                    <%= link_to "x", pointlist_path(pointlist.id), method: :delete %>
+  
+                    <%= form_for @pointlist_item do |f6| %>
+                      <%= hidden_field :pointlist_item, :level, value: 0 %>
+                      <%= hidden_field :pointlist_item, :parent_id, value: -1 %>
+                      <%= hidden_field :pointlist_item, :pointlist_id, value: pointlist.id %>
+
+                      <%= f6.text_field :title %>
+                      <%= f6.submit "Create" %>
+                    <% end %>
+                    <% if !@pointlist_items.nil? %>
+                      <% if !@pointlist_items[pointlist.id].nil? && !@pointlist_items[pointlist.id][1].nil? %>
+                        <% initial = @pointlist_items[pointlist.id][1][-1] %>
+                        <ul>
+                          <% initial.each do |point| %>
+                            <li><%= point.title %></li>
+                            <%= form_for @pointlist_item do |f8| %>
+                              <%= hidden_field :pointlist_item, :level, value: point.level %>
+                              <%= hidden_field :pointlist_item, :parent_id, value: point.id %>
+                              <%= hidden_field :pointlist_item, :pointlist_id, value: pointlist.id %>
+
+                              <%= f8.text_field :title %>
+                              <%= f8.submit "Create" %>
+                            <% end %>
+                            <%= render partial: 'tabs/pointlist', locals: {parent_item: point} %>
+                          <% end %>
+                        </ul>
+                      <% end %>
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>              
+
+              <h3>Create a pointlist</h3>
+              <%= form_for @pointlist do |f5| %>
+                <%= hidden_field :pointlist, :tab_id, value: @tab.id %>
+
+                <%= f5.label :title %>
+                <%= f5.text_field :title %>
+                <%= f5.submit "Create" %>
+              <% end %>
+            </div>
           </div>
-          <div role="tabpanel" class="tab-pane" id="messages">...</div>
         </div>
       </div>
-    </div>
 
-    <!--------------------------------------------------FIM           INTERIOR (CHECKS, NOTES, POINTS)------------------------------------------------------------------>
+      <!--------------------------------------------------FIM           INTERIOR (CHECKS, NOTES, POINTS)------------------------------------------------------------------>
 
+
+  </div>
+<script>
+  function edita() {
+    console.log("poop");
+  $('.update' ).css( "display", "block" );
+};
   
+</script>
+      <script>
+        var controla = false;
+        function edita() {
+          if(controla==false){
 
 <script>
  /* var controla = false;
@@ -194,6 +257,3 @@ $('.update').css("display", "block");
     }
     };*/
   </script>
-  
-  
-  </div>
