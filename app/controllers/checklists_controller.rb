@@ -7,11 +7,15 @@ class ChecklistsController < ApplicationController
   end
 
   def create
-    id = Checklist.create(params[:checklist][:tab_id], params[:checklist][:title]) 
-    if id
-      flash[:notice] = "Checklist created successfully"
+    if !params[:checklist][:title].empty?
+      id = Checklist.create(params[:checklist][:tab_id], params[:checklist][:title]) 
+      if id
+        flash[:notice] = "Checklist created successfully"
+      else
+        flash[:alert] = "Error while creating a checklist"
+      end
     else
-      flash[:alert] = "Error while creating a checklist"
+      flash[:alert] = "You cannot create checklist with empty title"
     end
     redirect_to :back
   end

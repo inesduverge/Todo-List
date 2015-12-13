@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 	validates_presence_of :email
 	validates_uniqueness_of :email
 
+  REGEX_EMAIL = /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/
+
 	def self.create(email, password)
 	  # obtem a conexao com a base de dados
       sql_connection = ActiveRecord::Base.connection
@@ -50,5 +52,9 @@ class User < ActiveRecord::Base
    def self.find_all_from_tab(tab_id)
     select_query = "SELECT u.* FROM shares s, users u WHERE u.id = s.user_id AND s.tab_id = '#{tab_id}'"
     self.find_by_sql(select_query)
+   end
+
+   def self.validate_email(email)
+    email.present? && (email =~ REGEX_EMAIL)
    end
 end
