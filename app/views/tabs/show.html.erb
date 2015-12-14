@@ -113,7 +113,8 @@
               <% @checklists.each do |checklist| %>
                 <li class="lista">
                   <span class= "nomeC">
-                  <%= checklist.title%></span>
+                    <%= checklist.title %>
+                  </span>
                   <%= image_tag "edit.svg", alt: "edit", class: "edita", onclick: "$('.checklist#{checklist.id}\').css('display', 'block')" %>
                   <%= link_to "x", checklist_path(checklist.id), method: :delete, class: 'x' %>
                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2" id= "inn">+</button>
@@ -157,13 +158,12 @@
                     <% @checklist_items[checklist.id].each do |item| %>
                       <li class="item">
                       <%= form_for item do |f3| %>
+                        <%= item.id %>
                       <span class="coco">
+                      <%= hidden_field :checklist_item, :id, value: item.id %>
                       <%= f3.text_field :description, class: 'texto3' %>
                       <%= f3.check_box :state, class: 'checkbox' %>
                       </span>
-                      <%#= image_tag "edit.svg", alt: "edit", class: "edita", onclick: "$('.checklist_item#{item.id}').css('display', 'block')" %>
-                      <%= hidden_field :checklist_item, :id, value: item.id %>
-                      <%= hidden_field :checklist_item, :checklist_id, value: item.checklist_id %>
                       <%= f3.submit "", class: 'bot3' %>
                       <% end %>
                       </li>
