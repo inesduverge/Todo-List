@@ -88,6 +88,7 @@
     border-bottom-style: solid;
     border-bottom-width: 1px;
     width:auto;
+    padding-right: 35px;
 }
 
 .tabs{
@@ -226,6 +227,7 @@
     margin-left: 0px;
     color: #666;
     margin-top: 0px;
+    padding-right:-30px;
 }
 
 
@@ -355,4 +357,14 @@ li.check {
 textarea#note_description{
     width: 900px;
     height: auto;
+}
+
+span.apaga {
+    display: none;
+}
+
+input#pointlist_title {
+    border-style: none;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
 }

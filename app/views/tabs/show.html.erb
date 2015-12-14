@@ -228,10 +228,10 @@
            <div class="modal-body">
            <%= form_for @note do |f| %>
             <%= hidden_field :note, :tab_id, value: @tab.id %>
-            <%= f.label :title%>
             <%= f.text_field :title, calss: 'texto6'%>
-            <%= f.label :description %>
-            <%= f.text_area :description, calss: 'texto6' %>
+            <span class="apaga">
+            <%= f.text_area :description, :value => "insert text here" %>
+            </span>
             </div>
             <div class="modal-footer">
               <%= f.submit "Create", class: 'create btn btn-default'%>
@@ -247,7 +247,7 @@
                 <% @pointlists.each do |pointlist| %>
                   <li>
                     <%= pointlist.title %>
-                    <%= link_to "x", pointlist_path(pointlist.id), method: :delete %>
+                    <%= link_to "x", pointlist_path(pointlist.id), method: :delete, class: 'x' %>
   
                     <%= form_for @pointlist_item do |f6| %>
                       <%= hidden_field :pointlist_item, :level, value: 0 %>
@@ -280,14 +280,29 @@
                 <% end %>
               </ul>              
 
-              <h3>Create a pointlist</h3>
-              <%= form_for @pointlist do |f5| %>
-                <%= hidden_field :pointlist, :tab_id, value: @tab.id %>
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal5" id= "in">new pointlist</button>
 
-                <%= f5.label :title %>
-                <%= f5.text_field :title %>
-                <%= f5.submit "Create" %>
-              <% end %>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Create a pointlist</h4>
+          </div>
+           <div class="modal-body">
+           <%= form_for @pointlist do |f5| %>
+                <%= hidden_field :pointlist, :tab_id, value: @tab.id %>
+                <%= f5.text_field :title, calss: 'texto6'%>
+            </div>
+            <div class="modal-footer">
+              <%= f5.submit "Create", class: 'create btn btn-default'%>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
             </div>
           </div>
         </div>
