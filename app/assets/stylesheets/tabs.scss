@@ -82,7 +82,7 @@
     font-weight:300;
 }
 
-.texto{
+.texto, #note_title, #note_description{
     outline: none;
     border-style: none;
     border-bottom-style: solid;
@@ -136,7 +136,7 @@
     font-size: 50px;
 }
 
-#titC{
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
     color: rgba(79, 79, 79, 0.6);
     font-size: 22px;
     font-weight: 300;
@@ -261,4 +261,45 @@ input.checklist
 {
 width: 50x;
 height: 50px;
+}
+
+.nav-tabs > li > a {
+    font-size: 22px;
+    font-weight: 300;
+    color: rgba(79, 79, 79, 0.6);
+}
+
+.nav-tabs > li > a:hover {
+    font-size: 22px;
+    font-weight: 300;
+    border-color: #ddd #ddd rgba(255, 255, 255, 0);
+    border-bottom: none;
+    background: linear-gradient(135deg, #7ffdec 0%, #73ff9f 57%, #73ff9f 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: rgba(115, 255, 159, 0);
+}
+
+
+.nav-tabs > li.active > a:hover {
+    text-decoration: none;
+    background-color: rgba(115, 255, 159, 0);
+    border-bottom: none;
+    color: rgba(79, 79, 79, 0.6);
+    font-size: 22px;
+    font-weight: 300;
+}
+
+.modal-body {
+    position: relative;
+    padding: 15px;
+    display: table-caption;
+}
+
+label#desc {
+    margin-top: 35px;
 }
