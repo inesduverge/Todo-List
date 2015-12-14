@@ -158,13 +158,13 @@
                     <% @checklist_items[checklist.id].each do |item| %>
                       <li class="item">
                       <%= form_for item do |f3| %>
-                        <%= item.id %>
                       <span class="coco">
                       <%= hidden_field :checklist_item, :id, value: item.id %>
                       <%= f3.text_field :description, class: 'texto3' %>
                       <%= f3.check_box :state, class: 'checkbox' %>
                       </span>
                       <%= f3.submit "", class: 'bot3' %>
+                      <%= link_to "x", checklist_item_path(item.id), method: :delete, class: 'x' %>
                       <% end %>
                       </li>
                     <% end %>
