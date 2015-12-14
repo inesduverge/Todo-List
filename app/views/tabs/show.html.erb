@@ -202,22 +202,19 @@
         <div role="tabpanel" class="tab-pane" id="profile">
           <ul>
             <% @notes.each do |note| %>
-              <li>
-                <%= note.title %>
-                <%= link_to "x", note_path(note.id), method: :delete %>
-                <p><%= note.description %><p>
+              <li class="check">
                 <%= form_for note do |f15| %>
                   <%= hidden_field :note, :tab_id, value: @tab.id %>
                   <%= hidden_field :note, :id, value: note.id %>
-                  <%= f15.label :title %>
-                  <%= f15.text_field :title %>
-                  <%= f15.label :description %>
-                  <%= f15.text_area :description %>
-                  <%= f15.submit "Update" %>
+                  <%= f15.text_field :title, class: 'titnote'  %>
+                  <%= link_to "x", note_path(note.id), method: :delete, class: 'x' %>
+                  <%= f15.submit "", class: 'bot3' %>
+                  <%= f15.text_area :description, class: 'textonote' %>
                 <% end %>
               </li>
                 <% end %>
               </ul>
+              
               <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal4" id= "in">new note</button>
 
     <!-- Modal -->
@@ -232,9 +229,9 @@
            <%= form_for @note do |f| %>
             <%= hidden_field :note, :tab_id, value: @tab.id %>
             <%= f.label :title%>
-            <%= f.text_field :title, calss: 'texto'%>
-            <%= f.label :description, id: 'desc' %>
-            <%= f.text_area :description, calss: 'texto' %>
+            <%= f.text_field :title, calss: 'texto6'%>
+            <%= f.label :description %>
+            <%= f.text_area :description, calss: 'texto6' %>
             </div>
             <div class="modal-footer">
               <%= f.submit "Create", class: 'create btn btn-default'%>
