@@ -7,7 +7,7 @@ class ChecklistItem < ActiveRecord::Base
 
   def self.find_all(tab_id)
     items_by_id = {}
-    select_query = "SELECT * FROM checklist_items ci, checklists c WHERE ci.checklist_id = c.id AND c.tab_id = '#{tab_id}' ORDER BY ci.created_at DESC "
+    select_query = "SELECT ci.* FROM checklist_items ci, checklists c WHERE ci.checklist_id = c.id AND c.tab_id = '#{tab_id}' ORDER BY ci.created_at DESC "
     items = ChecklistItem.find_by_sql(select_query)
     items.each do |item|
       (items_by_id[item.checklist_id] ||= []) << item
@@ -22,24 +22,16 @@ class ChecklistItem < ActiveRecord::Base
   end
 
   def self.update(checklist_item)
-    boolean_values = ["FALSE", "TRUE"] 
-    query = "UPDATE checklist_items SET "
-
-    checklist_item.each do |k, v|
-      if k != 'id'
-        if k == 'state'
-          query += "#{k}=#{boolean_values[v.to_i]}, "
-        else
-          query += "#{k}='#{v}', " 
-        end
-      end
-    end
-
-    query = query[0..query.size - 3]
-    query += " WHERE id='#{checklist_item[:id]}' RETURNING id"
-
     connection = ActiveRecord::Base.connection
-    return connection.execute(query)
+
+    update_query_true = "UPDATE checklist_items SET description='#{checklist_item[:description]}', state=TRUE WHERE id='#{checklist_item[:id]}' RETURNING id"
+    update_query_false = "UPDATE checklist_items SET description='#{checklist_item[:description]}', state=FALSE WHERE id='#{checklist_item[:id]}' RETURNING id"
+
+    if checklist_item[:state] = '1'
+      return connection.execute(update_query_true)
+    else
+      return connection.execute(update_query_false)
+    end
   end
 
   def self.create(checklist_id, description)
