@@ -48,7 +48,7 @@
   border:none;
   font-size:1em;
   color: #696969;
-    
+
 }
 
 #line {
@@ -177,7 +177,7 @@
     text-decoration: none;
     font-size: 25px;
     margin-left: -61px;
-    
+
 }
 .lista {
     list-style-type: none;
@@ -343,10 +343,10 @@ label#desc {
     font-weight: 400;
     margin-left: -25px;
     color: #666;
-    margin-top: 0px; 
+    margin-top: 0px;
     border-bottom-color: white;
     overflow: hidden;
-    
+
 }
 
 li.check {
@@ -367,4 +367,46 @@ input#pointlist_title {
     border-style: none;
     border-bottom-style: solid;
     border-bottom-width: 1px;
+}
+
+.modal-header{
+  border:none!important;
+  padding:40px!important;
+}
+
+.myModalLabel{
+  text-align:center;
+  font-weight:300;
+}
+
+.modal-body{
+  border:none!important;
+  padding:40px!important;
+}
+.modal-footer{
+  border:none!important;
+  padding:40px!important;
+  text-align: center!important;
+}
+
+.modal-content{
+  border-radius: 0px!important;
+  box-shadow:none!important;
+  border:none!important;
+}
+
+.modal-title {
+    text-align: center!important;
+    font-weight: 300!important;
+  }
+
+.texto{
+width: 400px!important;
+margin-left: 59px!important;
+}
+
+.btn-create{
+border-radius: 0px!important;
+width: 400px!important;
+margin-top: -60px!important;
 }

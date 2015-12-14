@@ -18,9 +18,9 @@
       <% end %>
     </ul>
 
-  <!--------------------------------------------------CRIAR NOVA TAB------------------------------------------------------------------>  
+  <!--------------------------------------------------CRIAR NOVA TAB------------------------------------------------------------------>
   <div id="line"></div>
-  
+
   <div id='ct'>
     <%= form_for @new do |f| %>
       <%= f.text_field :titulo %>
@@ -44,14 +44,14 @@
               <%= f.text_field :titulo , class: 'texto'%>
             </div>
             <div class="modal-footer">
-              <%= f.submit "create" , class: 'create btn btn-default'%>
+              <%= f.submit "create" , class: 'create btn btn-default btn-create'%>
             </div>
           <% end %>
         </div>
       </div>
     </div>
 
-  <!--------------------------------------------------FIM   CRIAR NOVA TAB------------------------------------------------------------------> 
+  <!--------------------------------------------------FIM   CRIAR NOVA TAB------------------------------------------------------------------>
 
 
 <!-- Button trigger modal -->
@@ -71,7 +71,7 @@
               <%= f.text_field :email,  class: 'texto' %>
             </div>
             <div class="modal-footer">
-               <%= f.submit "Share", class: 'share btn btn-default'%>
+               <%= f.submit "Share", class: 'share btn btn-default btn-create'%>
             </div>
           <% end %>
         </div>
@@ -88,10 +88,10 @@
       <% end %>
     </ul>
 
-    
+
   </div>
 
-  <!--------------------------------------------------INTERIOR (CHECKS, NOTES, POINTS)------------------------------------------------------------------> 
+  <!--------------------------------------------------INTERIOR (CHECKS, NOTES, POINTS)------------------------------------------------------------------>
 
   <div class="col-md-10">
     <p class="titulo"><%= @tab.titulo %></p>
@@ -102,12 +102,12 @@
         <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Notes</a></li>
         <li role="presentation"><a href="#pointlist" aria-controls="messages" role="tab" data-toggle="tab">Pointlist</a></li>
       </ul>
-<!--------------------------------------------------CHECKS------------------------------------------------------------------> 
+<!--------------------------------------------------CHECKS------------------------------------------------------------------>
       <!-- Tab panes -->
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="home">
-          
-    
+
+
           <ul>
             <ul>
               <% @checklists.each do |checklist| %>
@@ -128,9 +128,9 @@
                 </div>
 
                 <%# Form para criar um item na checklist %>
-                
+
                   <!-- Button trigger modal -->
-    
+
 
     <!-- Modal -->
     <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -146,7 +146,7 @@
               <%= f4.text_area :description, class: 'texto'%>
             </div>
             <div class="modal-footer">
-              <%= f4.submit "Create", class: 'create btn btn-default'%>
+              <%= f4.submit "Create", class: 'create btn btn-default btn-create'%>
             </div>
           <% end %>
         </div>
@@ -191,14 +191,14 @@
               <%= f.text_field :title, class: 'texto'%>
             </div>
             <div class="modal-footer">
-              <%= f.submit "Create", class: 'create btn btn-default'%>
+              <%= f.submit "Create", class: 'create btn btn-default btn-create'%>
             </div>
           <% end %>
         </div>
       </div>
     </div>
     </div>
-<!-------------------------------------------------- NOTES, ------------------------------------------------------------------> 
+<!-------------------------------------------------- NOTES, ------------------------------------------------------------------>
         <div role="tabpanel" class="tab-pane" id="profile">
           <ul>
             <% @notes.each do |note| %>
@@ -214,7 +214,7 @@
               </li>
                 <% end %>
               </ul>
-              
+
               <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal4" id= "in">new note</button>
 
     <!-- Modal -->
@@ -234,21 +234,20 @@
             </span>
             </div>
             <div class="modal-footer">
-              <%= f.submit "Create", class: 'create btn btn-default'%>
+              <%= f.submit "Create", class: 'create btn btn-default btn-create'%>
             </div>
           <% end %>
         </div>
       </div>
     </div>
   </div>
-  <!--------------------------------------------------POINTS------------------------------------------------------------------>           
+  <!--------------------------------------------------POINTS------------------------------------------------------------------>
             <div role="tabpanel" class="tab-pane" id="pointlist">
               <ul>
                 <% @pointlists.each do |pointlist| %>
                   <li>
                     <%= pointlist.title %>
                     <%= link_to "x", pointlist_path(pointlist.id), method: :delete, class: 'x' %>
-  
                     <%= form_for @pointlist_item do |f6| %>
                       <%= hidden_field :pointlist_item, :level, value: 0 %>
                       <%= hidden_field :pointlist_item, :parent_id, value: -1 %>
@@ -278,7 +277,7 @@
                     <% end %>
                   </li>
                 <% end %>
-              </ul>              
+              </ul>
 
             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal5" id= "in">new pointlist</button>
 
