@@ -30,7 +30,7 @@ class PointlistItem < ActiveRecord::Base
     return sql_connection.execute(insertion_query)
   end
 
-  def validate(item)
+  def self.validate(item)
     !item[:title].empty? 
   end
 

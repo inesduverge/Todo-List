@@ -245,8 +245,10 @@
             <div role="tabpanel" class="tab-pane" id="pointlist">
               <ul>
                 <% @pointlists.each do |pointlist| %>
-                  <li>
+                  <li class="point">
+                    <span class= "nomeP">
                     <%= pointlist.title %>
+                  </span>
                     <%= link_to "x", pointlist_path(pointlist.id), method: :delete, class: 'x' %>
                     <%= form_for @pointlist_item do |f6| %>
                       <%= hidden_field :pointlist_item, :level, value: 0 %>
