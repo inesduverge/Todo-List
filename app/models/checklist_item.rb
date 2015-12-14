@@ -7,7 +7,7 @@ class ChecklistItem < ActiveRecord::Base
 
   def self.find_all(tab_id)
     items_by_id = {}
-    select_query = "SELECT * FROM checklist_items ci, checklists c WHERE ci.checklist_id = c.id AND c.tab_id = '#{tab_id}' "
+    select_query = "SELECT * FROM checklist_items ci, checklists c WHERE ci.checklist_id = c.id AND c.tab_id = '#{tab_id}' ORDER BY ci.created_at DESC "
     items = ChecklistItem.find_by_sql(select_query)
     items.each do |item|
       (items_by_id[item.checklist_id] ||= []) << item
