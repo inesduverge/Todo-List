@@ -15,11 +15,15 @@
  *= require bootstrap
  */
 .flash_notice{
-  color: blue;
+  right: 35px;
   position: absolute;
+  color: #87FDEE;
+  font-weight: 300;
 }
 
 .flash_alert {
-  color: red;
+  right: 35px;
   position: absolute;
+  color: #FFDADA;
+  font-weight: 300;
 }
