@@ -12,13 +12,13 @@ class PointlistsController < ApplicationController
       flash[:alert] = "You cannot create a pointlist with an empty title"
     end
 
-    redirect_to :back
+    redirect_to tab_path(params[:pointlist][:tab_id]) + "#pointlist"
   end
 
   def destroy
     Pointlist.destroy(params[:id])
     flash[:notice] = "Pointlist was deleted"
-    redirect_to :back
+    redirect_to tab_path(params[:tab_id]) + "#pointlist"
   end
 
 end

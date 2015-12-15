@@ -49,13 +49,13 @@ class TabsController < ApplicationController
     else
       flash[:alert] = "Tab title is either empty or too long(10 chars max)"
     end
-    redirect_to :back
+    redirect_to tab_path(tab_id.values.first)
   end
 
   def update
     if Tab.validate_title(params[:tab][:titulo])
       id = Tab.update(params[:tab][:id], params[:tab][:titulo])
-      if id 
+      if id
         flash[:notice] = "Tab title updated"
       else
         flash[:alert] = "Could not update tab name"
@@ -72,8 +72,8 @@ class TabsController < ApplicationController
     flash[:notice] = "Tab was deleted"
     redirect_to tabs_path
   end
-  
-  
+
+
   private
 
   def tab_params

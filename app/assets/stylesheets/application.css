@@ -14,3 +14,12 @@
  *= require_self
  *= require bootstrap
  */
+.flash_notice{
+  color: blue;
+  position: absolute;
+}
+
+.flash_alert {
+  color: red;
+  position: absolute;
+}
