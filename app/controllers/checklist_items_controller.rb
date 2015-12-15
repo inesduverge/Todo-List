@@ -1,6 +1,9 @@
 class ChecklistItemsController < ApplicationController
   
   def create
+    puts "########"
+    puts params[:checklist_item][:checklist_id]
+
     if !params[:checklist_item][:description].empty?
       id = ChecklistItem.create(params[:checklist_item][:checklist_id],
                                 params[:checklist_item][:description])

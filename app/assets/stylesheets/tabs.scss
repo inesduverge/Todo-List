@@ -246,7 +246,7 @@ span.coco {
     background-size: 27px auto;
 }
 
-#inn {
+.inn {
     color: #76FEB0;
     font-size: 32px;
     font-weight: 500;
@@ -254,7 +254,12 @@ span.coco {
     margin-left: 0px;
     padding-right: 0px;
     padding-left: 0px;
-}
+     border: none;
+    margin-left: 0px;
+    background: none;
+    cursor: pointer; 
+    cursor: hand; 
+  }
 
 .x{
     background: linear-gradient(135deg, #7ffdec 0%, #73ff9f 57%, #73ff9f 100%);
@@ -421,9 +426,14 @@ margin-top: -60px!important;
 }
 
 li.point {
+    display: none;
+}
+
+li.pointO {
     list-style-type: none;
     display: table-caption;
     margin-top: 27px;
+    width: 400px;
 }
 
 .intro{
@@ -440,4 +450,26 @@ input[type="checkbox"] {
     margin: 7px 0 0;
     margin-top: 1px \9;
     line-height: normal;
+}
+
+
+li.item2 {
+    list-style-type: circle;
+    font-size: 18px;
+    color: #666666;
+    margin-top: -9px;
+    margin-left: -19px
+}
+
+input#checklist_item_description {
+    border-bottom-color: darkgray;
+}
+
+input#pointlist_item_title {
+    width: 200px;
+    border-bottom-color: darkgray;
+}
+
+span.inn {
+    margin-left: 7px;
 }

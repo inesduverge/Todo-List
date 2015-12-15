@@ -115,9 +115,9 @@
                   <span class= "nomeC">
                     <%= checklist.title %>
                   </span>
-                  <%= image_tag "edit.svg", alt: "edit", class: "edita", onclick: "$('.checklist#{checklist.id}\').css('display', 'block')" %>
+                   <%= image_tag "edit.svg", alt: "edit", class: "edita", onclick: "$('.checklist#{checklist.id}\').css('display', 'block')" %>
                   <%= link_to "x", checklist_path(checklist.id), method: :delete, class: 'x' %>
-                  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2" id= "inn">+</button>
+                  
                 </li>
                 <div class="update <%= "checklist#{checklist.id}" %>">
                   <%= form_for checklist do |f16| %>
@@ -133,25 +133,6 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Create new item</h4>
-          </div>
-           <%= form_for @checklist_item do |f4| %>
-           <%= hidden_field :checklist_item, :checklist_id, value: checklist.id %>
-            <div class="modal-body">
-              <%= f4.text_area :description, class: 'texto'%>
-            </div>
-            <div class="modal-footer">
-              <%= f4.submit "Create", class: 'create btn btn-default btn-create'%>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
             <ul>
                   <%# Apresentação de cada item de uma checklist %>
                   <% if !@checklist_items[checklist.id].nil? %>
@@ -166,11 +147,20 @@
                       <%= f3.submit "", class: 'bot3' %>
                       <%= link_to "x", checklist_item_path(item.id), method: :delete, class: 'x' %>
                       <% end %>
+                          
                       </li>
                     <% end %>
                   <% end %>
                 </ul>
+                <li class="item2">
+                <%= form_for @checklist_item do |f4| %>
+                    <%= hidden_field :checklist_item, :checklist_id, value: checklist.id %>
+                      <%= f4.text_field :description, class: 'texto',  style: 'color: black; background-color: transparent, border-color: grey;'%>
+                      <%= f4.submit "+", class: 'inn'%>
+                  <% end %>
               <% end %>
+              </li>
+              
             </ul>
 
           </ul>
@@ -245,33 +235,38 @@
             <div role="tabpanel" class="tab-pane" id="pointlist">
               <ul>
                 <% @pointlists.each do |pointlist| %>
-                  <li class="point">
+                  <li class="pointO">
                     <span class= "nomeP">
                     <%= pointlist.title %>
                   </span>
+                  
                     <%= link_to "x", pointlist_path(pointlist.id, tab_id: pointlist.tab_id), method: :delete, class: 'x' %>
+                    <span onclick= "$('li.point').css('display', 'table-caption')" class="inn">+</span>
+                    <li class="point">
                     <%= form_for @pointlist_item do |f6| %>
                       <%= hidden_field :pointlist_item, :level, value: 0 %>
                       <%= hidden_field :pointlist_item, :parent_id, value: -1 %>
                       <%= hidden_field :pointlist_item, :pointlist_id, value: pointlist.id %>
-
-                      <%= f6.text_field :title%>
-                      <%= f6.submit "Create" %>
+                      
+                      <%= f6.text_field :title, class: 'texto',  style: 'color: black; background-color: transparent, border-color: grey;'%>
+                      <%= f6.submit "+", class: 'inn'%>
                     <% end %>
+                    </li>
                     <% if !@pointlist_items.nil? %>
                       <% if !@pointlist_items[pointlist.id].nil? && !@pointlist_items[pointlist.id][1].nil? %>
                         <% initial = @pointlist_items[pointlist.id][1][-1] %>
                         <ul>
                           <% initial.each do |point| %>
                             <li><%= point.title %></li>
+                            <li class="point">
                             <%= form_for @pointlist_item do |f8| %>
                               <%= hidden_field :pointlist_item, :level, value: point.level %>
                               <%= hidden_field :pointlist_item, :parent_id, value: point.id %>
                               <%= hidden_field :pointlist_item, :pointlist_id, value: pointlist.id %>
-
-                              <%= f8.text_field :title %>
-                              <%= f8.submit "Create" %>
+                              <%= f8.text_field :title, class: 'texto',  style: 'color: black; background-color: transparent, border-color: grey;'%>
+                              <%= f8.submit "+", class: 'inn'%>
                             <% end %>
+                            </li>
                             <%= render partial: 'tabs/pointlist', locals: {parent_item: point} %>
                           <% end %>
                         </ul>
