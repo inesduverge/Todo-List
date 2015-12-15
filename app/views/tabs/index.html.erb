@@ -1,26 +1,28 @@
-<ul>
+<div class="body">
+<div class="col-md-2">
+<ul id="lista_tabs">
   <% @tabs.each do |tab| %>
-    <li><%= link_to tab.titulo, tab_path(tab.id) %></li>
+    <li class="tabs"><%= link_to tab.titulo, tab_path(tab.id) %></li>
 
-
+    <div class="update <%= "tab#{tab.id}" %>">
     <%= form_for tab do |f2| %>
       <%= hidden_field :tab, :id, value: tab.id %>
-      <%= f2.text_field :titulo%>
-      <%= f2.submit "Update" %>
+      <%= f2.text_field :titulo, class: 'texto' %>
+      <%= f2.submit " ", class: 'bot' %>
     <% end %>
+    </div>
 
- 
   <% end %>
 </ul>
-
+<div id="line"></div>
 <div id='ct'>
 <%= form_for @tab do |f| %>
   <%= f.text_field :titulo %>
   <%= f.submit "create" , class: 'create'%>
 <% end %>
   </div>
-  
-  
+
+
   <!-- Button trigger modal -->
 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" id= "new">new tab</button>
 
@@ -43,11 +45,22 @@
     </div>
   </div>
 </div>
-  
-  
-  
+</div>
+<div class="col-md-10">
+<p class="titulo">Welcome!</p>
+<p class="intro"> To start using <strong>To-do</strong> you must create a tab, using the button on the left.</p>
+<p class="intro"> In each tab you can create checklists, notes, and pointlists.</p><p class="intro"> You can also share it with your friends!!!</p>
+<p class="intro"> Enjoy this Beta version of <strong>To-do</strong>, have fun!!
+</p>
+
+</div>
+
+</div>
+</script>
+
+
   <script>
 function aparece() {
-    document.getElementById("ct").style.display= "block";  
+    document.getElementById("ct").style.display= "block";
     };
   </script>
