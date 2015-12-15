@@ -1,6 +1,6 @@
 class Note < ActiveRecord::Base
 
-  TITLE_SIZE = 20
+  TITLE_SIZE = 25
 
   def self.find_by_id(note_id)
     select_query = "SELECT * FROM notes WHERE id = '#{note_id}'"

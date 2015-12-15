@@ -1,6 +1,6 @@
 class Checklist < ActiveRecord::Base
 
-  TITLE_SIZE = 20
+  TITLE_SIZE = 40
 
   def self.find_by_id(checklist_id)
     select_query = "SELECT * FROM checklists WHERE id = '#{checklist_id}'"

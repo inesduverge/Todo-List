@@ -9,7 +9,7 @@ class ChecklistsController < ApplicationController
         flash[:alert] = "Error while creating a checklist"
       end
     else
-      flash[:alert] = "Title is either too big (20 characters) or empty"
+      flash[:alert] = "Title is either too big (40 characters) or empty"
     end
     redirect_to :back
   end

@@ -9,7 +9,7 @@ class NotesController < ApplicationController
         flash[:alert] = "Error while creating a note"
       end
     else
-      flash[:alert] = "You cannot have a note with an empty description and/or title"
+      flash[:alert] = "You cannot have a note with no title and/or more than 25 characters"
     end
     redirect_to tab_path(params[:note][:tab_id]) + "#profile"
   end

@@ -47,7 +47,7 @@ class TabsController < ApplicationController
         flash[:alert] = 'There was an error trying to create a tab for you'
       end
     else
-      flash[:alert] = "Tab title is either empty or too long(10 chars max)"
+      flash[:alert] = "Tab title is either empty or too long(15 chars max)"
       redirect_to :back
       return
     end

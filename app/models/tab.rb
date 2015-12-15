@@ -1,6 +1,6 @@
 class Tab < ActiveRecord::Base
 
-  TITLE_SIZE = 10
+  TITLE_SIZE = 15
 
   def self.find_all_from_user(user_id)
     select_query = "SELECT t.* FROM shares s, tabs t WHERE t.id = s.tab_id  AND s.user_id = '#{user_id}' ORDER BY t.created_at"
