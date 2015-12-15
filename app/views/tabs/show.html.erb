@@ -115,9 +115,19 @@
                   <span class= "nomeC">
                     <%= checklist.title %>
                   </span>
+
+                  <%= form_for @checklist_item do |f4| %>
+                    <%= hidden_field :checklist_item, :checklist_id, value: checklist.id %>
+                    <div class="modal-body">
+                      <%= f4.text_area :description, class: 'texto'%>
+                    </div>
+                    <div class="modal-footer">
+                      <%= f4.submit "Create", class: 'create btn btn-default btn-create'%>
+                    </div>
+                  <% end %>
+
                   <%= image_tag "edit.svg", alt: "edit", class: "edita", onclick: "$('.checklist#{checklist.id}\').css('display', 'block')" %>
                   <%= link_to "x", checklist_path(checklist.id), method: :delete, class: 'x' %>
-                  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2" id= "inn">+</button>
                 </li>
                 <div class="update <%= "checklist#{checklist.id}" %>">
                   <%= form_for checklist do |f16| %>
@@ -133,25 +143,6 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Create new item</h4>
-          </div>
-           <%= form_for @checklist_item do |f4| %>
-           <%= hidden_field :checklist_item, :checklist_id, value: checklist.id %>
-            <div class="modal-body">
-              <%= f4.text_area :description, class: 'texto'%>
-            </div>
-            <div class="modal-footer">
-              <%= f4.submit "Create", class: 'create btn btn-default btn-create'%>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
             <ul>
                   <%# Apresentação de cada item de uma checklist %>
                   <% if !@checklist_items[checklist.id].nil? %>
