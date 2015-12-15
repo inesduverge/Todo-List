@@ -24,6 +24,6 @@
 .flash_alert {
   right: 35px;
   position: absolute;
-  color: #FFDADA;
+  color: hsla(0, 100%, 62%, 0.57);
   font-weight: 300;
 }

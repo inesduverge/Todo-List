@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
- # def new
+  def new
     #para o caso de o user estar logado, a pagina de sign up nao tem sentido
-  #  redirect_to tabs_path if !session[:user_id].nil?
- # end
+    #redirect_to tabs_path if !session[:user_id].nil?
+  end
 
   def create
   	user = User.authenticate(params[:email], params[:password])

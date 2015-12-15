@@ -48,6 +48,8 @@ class TabsController < ApplicationController
       end
     else
       flash[:alert] = "Tab title is either empty or too long(10 chars max)"
+      redirect_to :back
+      return
     end
     redirect_to tab_path(tab_id.values.first)
   end
