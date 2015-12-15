@@ -16,11 +16,10 @@
       </div>
 
 <% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  <%= content_tag :div, msg, class: "flash_#{name}" %>
 <% end %>
 
 <%= yield %>
 
 </body>
-<footer><%= link_to "Go back", tabs_path, class: 'back'%></footer>
 </html>

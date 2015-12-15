@@ -97,7 +97,7 @@
     <p class="titulo"><%= @tab.titulo %></p>
     <div>
       <!-- Nav tabs -->
-      <ul class="nav nav-tabs" role="tablist">
+      <ul class="nav nav-tabs" role="tablist" id="myTab">
         <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" id="titC">Checklists</a></li>
         <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Notes</a></li>
         <li role="presentation"><a href="#pointlist" aria-controls="messages" role="tab" data-toggle="tab">Pointlist</a></li>
@@ -207,7 +207,7 @@
                   <%= hidden_field :note, :tab_id, value: @tab.id %>
                   <%= hidden_field :note, :id, value: note.id %>
                   <%= f15.text_field :title, class: 'titnote'  %>
-                  <%= link_to "x", note_path(note.id), method: :delete, class: 'x' %>
+                  <%= link_to "x", note_path(note.id, tab_id: note.tab_id), method: :delete, class: 'x' %>
                   <%= f15.submit "", class: 'bot3' %>
                   <%= f15.text_area :description, class: 'textonote' %>
                 <% end %>
@@ -249,7 +249,7 @@
                     <span class= "nomeP">
                     <%= pointlist.title %>
                   </span>
-                    <%= link_to "x", pointlist_path(pointlist.id) + "#pointlist", method: :delete, class: 'x' %>
+                    <%= link_to "x", pointlist_path(pointlist.id, tab_id: pointlist.tab_id), method: :delete, class: 'x' %>
                     <%= form_for @pointlist_item do |f6| %>
                       <%= hidden_field :pointlist_item, :level, value: 0 %>
                       <%= hidden_field :pointlist_item, :parent_id, value: -1 %>
@@ -297,7 +297,7 @@
                 <%= f5.text_field :title, calss: 'texto6'%>
             </div>
             <div class="modal-footer">
-              <%= f5.submit "Create", class: 'create btn btn-default'%>
+              <%= f5.submit "Create", class: 'create btn btn-default btn-create'%>
             </div>
           <% end %>
         </div>
@@ -324,3 +324,21 @@ $('input[type="text"]')
     // resize on page load
     .each(resizeInput);
   </script>
+
+
+  <script>
+    $('#myTab a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    // store the currently selected tab in the hash value
+    $("ul.nav-tabs > li > a").on("shown.bs.tab", function (e) {
+        var id = $(e.target).attr("href").substr(1);
+        window.location.hash = id;
+    });
+
+    // on load of the page: switch to the currently selected tab
+    var hash = window.location.hash;
+    $('#myTab a[href="' + hash + '"]').tab('show');
+</script>
