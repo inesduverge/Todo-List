@@ -16,8 +16,6 @@ class ChecklistItemsController < ApplicationController
   end
 
   def update
-    puts "#######"
-    puts params[:checklist_item][:id]
     if !params[:checklist_item][:description].empty?
       id = ChecklistItem.update(params[:checklist_item])
       if id

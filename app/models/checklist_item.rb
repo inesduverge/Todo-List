@@ -27,7 +27,7 @@ class ChecklistItem < ActiveRecord::Base
     update_query_true = "UPDATE checklist_items SET description='#{checklist_item[:description]}', state=TRUE WHERE id='#{checklist_item[:id]}' RETURNING id"
     update_query_false = "UPDATE checklist_items SET description='#{checklist_item[:description]}', state=FALSE WHERE id='#{checklist_item[:id]}' RETURNING id"
 
-    if checklist_item[:state] = '1'
+    if checklist_item[:state] == '1'
       return connection.execute(update_query_true)
     else
       return connection.execute(update_query_false)
