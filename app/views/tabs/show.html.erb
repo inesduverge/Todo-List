@@ -281,6 +281,8 @@
                 <% end %>
               </ul>
 
+
+                   <!-- botão criar point list -->
             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal5" id= "in">new pointlist</button>
 
     <!-- Modal -->
@@ -312,17 +314,22 @@
       <!--------------------------------------------------FIM           INTERIOR (CHECKS, NOTES, POINTS)------------------------------------------------------------------>
 
 
-  </div>
-<script>
-  function resizeInput() {
-    $(this).attr('size', $(this).val().length);
-}
+        </div>
+          <script>
+            function resizeInput() {
+              $(this).attr('size', $(this).val().length);
+            }
 
-$('input[type="text"]')
+            if(resizeInput<200){
+    
+            }
+            else{
+      $('input[type="text"]')
     // event handler
     .keyup(resizeInput)
     // resize on page load
     .each(resizeInput);
+}
   </script>
 
 
